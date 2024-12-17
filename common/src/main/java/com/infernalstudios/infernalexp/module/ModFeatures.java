@@ -2,6 +2,7 @@ package com.infernalstudios.infernalexp.module;
 
 import com.infernalstudios.infernalexp.IECommon;
 import com.infernalstudios.infernalexp.world.feature.custom.DullthornsFeature;
+import com.infernalstudios.infernalexp.world.feature.custom.NetherPlantFeature;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
@@ -34,4 +35,5 @@ public class ModFeatures {
 
 
     public static final ResourceKey<Feature<?>> DULLTHORNS = register("dullthorns", DullthornsFeature.INSTANCE);
+    public static final ResourceKey<Feature<?>> NETHER_PLANT = register("nether_plant", NetherPlantFeature.INSTANCE);
 }

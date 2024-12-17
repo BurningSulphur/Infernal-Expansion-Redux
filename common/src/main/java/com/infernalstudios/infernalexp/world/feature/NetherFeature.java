@@ -1,0 +1,44 @@
+package com.infernalstudios.infernalexp.world.feature;
+
+import com.infernalstudios.infernalexp.IEConstants;
+import com.infernalstudios.infernalexp.module.ModBlocks;
+import com.infernalstudios.infernalexp.world.feature.config.DullthornsFeatureConfig;
+import com.mojang.serialization.Codec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public abstract class NetherFeature<F extends FeatureConfiguration> extends Feature<F> {
+    public NetherFeature(Codec<F> codec) {
+        super(codec);
+    }
+
+    @Override
+    public boolean place(FeaturePlaceContext<F> context) {
+        WorldGenLevel level = context.level();
+        BlockPos pos = context.origin();
+
+        List<BlockPos> positions = new ArrayList<>();
+        for (int i = 0; i < level.getMaxBuildHeight(); i++) {
+            if (level.isEmptyBlock(pos.atY(i)) && this.isGround(level.getBlockState(pos.atY(i-1))))
+                positions.add(pos.atY(i));
+        }
+        if (positions.isEmpty()) return false;
+        Collections.shuffle(positions);
+        pos = positions.get(0);
+
+        return this.generate(pos, context);
+    }
+
+    public abstract boolean generate(BlockPos pos, FeaturePlaceContext<F> context);
+
+    public abstract boolean isGround(BlockState state);
+}

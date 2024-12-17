@@ -36,7 +36,9 @@ public abstract class MinecraftServerMixin {
 
         LevelStem levelStem = self.registries().compositeAccess().registryOrThrow(Registries.LEVEL_STEM).get(LevelStem.NETHER);
         if (levelStem == null)
-            throw new NullPointerException(LevelStem.NETHER.location() + " is not a valid level stem key. This is likely the result of a broken level.dat, likely caused by moving this world between MC versions.");
+            throw new NullPointerException(LevelStem.NETHER.location()
+                    + " is not a valid level stem key. This is likely the result of a broken level.dat, likely caused by"
+                    + " moving this world between MC versions.");
 
         ChunkGenerator chunkGenerator = levelStem.generator();
         boolean hasNetherBiomes = chunkGenerator.getBiomeSource().possibleBiomes().stream().anyMatch(
@@ -47,7 +49,7 @@ public abstract class MinecraftServerMixin {
 
                 ((NoiseGeneratorSettingsAccessor) (Object) settings).setSurfaceRule(
                         SurfaceRules.sequence(
-                                ModSurfaceRules.addNetherSurfaceRules(), settings.surfaceRule()
+                                ModSurfaceRules.addNetherSurfaceRulesWithBedrock(), settings.surfaceRule()
                         )
                 );
 

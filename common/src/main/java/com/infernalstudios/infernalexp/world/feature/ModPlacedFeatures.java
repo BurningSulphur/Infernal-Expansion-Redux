@@ -35,12 +35,17 @@ public class ModPlacedFeatures {
         var configLookup = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, DULLTHORNS, configLookup.getOrThrow(ModConfiguredFeatures.DULLTHORNS),
-                InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
-                BiomeFilter.biome());
+                BiomeFilter.biome(),
+                CountPlacement.of(10));
+
+        register(context, LUMINOUS_FUNGUS, configLookup.getOrThrow(ModConfiguredFeatures.LUMINOUS_FUNGUS),
+                BiomeFilter.biome(),
+                CountPlacement.of(5));
     }
 
 
 
     public static final ResourceKey<PlacedFeature> DULLTHORNS = create("dullthorns");
+
+    public static final ResourceKey<PlacedFeature> LUMINOUS_FUNGUS = create("luminous_fungus");
 }

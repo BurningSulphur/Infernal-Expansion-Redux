@@ -1,12 +1,12 @@
 {
-  "feature": "infernalexp:dullthorns",
+  "feature": "infernalexp:luminous_fungus",
   "placement": [
     {
       "type": "minecraft:biome"
     },
     {
       "type": "minecraft:count",
-      "count": 10
+      "count": 5
     }
   ]
 }

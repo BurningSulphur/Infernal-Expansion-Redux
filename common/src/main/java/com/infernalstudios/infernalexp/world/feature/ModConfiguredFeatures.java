@@ -4,7 +4,9 @@ import com.infernalstudios.infernalexp.IECommon;
 import com.infernalstudios.infernalexp.block.DullthornsBlock;
 import com.infernalstudios.infernalexp.module.ModBlocks;
 import com.infernalstudios.infernalexp.world.feature.config.DullthornsFeatureConfig;
+import com.infernalstudios.infernalexp.world.feature.config.SingleBlockFeatureConfig;
 import com.infernalstudios.infernalexp.world.feature.custom.DullthornsFeature;
+import com.infernalstudios.infernalexp.world.feature.custom.NetherPlantFeature;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -12,6 +14,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NetherForestVegetationConfig;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 public class ModConfiguredFeatures {
@@ -29,9 +32,11 @@ public class ModConfiguredFeatures {
                 new DullthornsFeatureConfig(UniformInt.of(4, 7),
                         BlockStateProvider.simple(ModBlocks.DULLTHORNS.get()),
                         BlockStateProvider.simple(ModBlocks.DULLTHORNS.get().defaultBlockState().setValue(DullthornsBlock.TIP, true))));
+
+        register(context, LUMINOUS_FUNGUS, NetherPlantFeature.INSTANCE,
+                new SingleBlockFeatureConfig(BlockStateProvider.simple(ModBlocks.LUMINOUS_FUNGUS.get())));
     }
 
-
-
     public static final ResourceKey<ConfiguredFeature<?, ?>> DULLTHORNS = create("dullthorns");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LUMINOUS_FUNGUS = create("luminous_fungus");
 }

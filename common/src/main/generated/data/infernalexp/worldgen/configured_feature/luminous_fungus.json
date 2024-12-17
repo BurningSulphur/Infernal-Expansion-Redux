@@ -1,0 +1,14 @@
+{
+  "type": "infernalexp:nether_plant",
+  "config": {
+    "stem": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "infernalexp:luminous_fungus",
+        "Properties": {
+          "is_lit": "false"
+        }
+      }
+    }
+  }
+}
