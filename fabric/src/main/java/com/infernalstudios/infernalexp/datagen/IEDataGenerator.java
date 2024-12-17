@@ -5,12 +5,16 @@ import com.infernalstudios.infernalexp.module.*;
 import com.infernalstudios.infernalexp.registration.holders.BlockDataHolder;
 import com.infernalstudios.infernalexp.registration.holders.ItemDataHolder;
 import com.infernalstudios.infernalexp.registration.holders.MobEffectDataHolder;
+import com.infernalstudios.infernalexp.world.feature.ModConfiguredFeatures;
+import com.infernalstudios.infernalexp.world.feature.ModPlacedFeatures;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.TexturedModel;
@@ -28,6 +32,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import org.apache.http.config.RegistryBuilder;
 
 import java.util.List;
 import java.util.Map;
@@ -46,6 +51,31 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(IEModelProvider::new);
         pack.addProvider(IELangProvider::new);
         pack.addProvider(IERecipeProvider::new);
+        pack.addProvider(IEWorldGenProvider::new);
+    }
+
+    @Override
+    public void buildRegistry(RegistrySetBuilder builder) {
+        builder.add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
+        builder.add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
+    }
+
+
+    private static class IEWorldGenProvider extends FabricDynamicRegistryProvider {
+        public IEWorldGenProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+            super(output, registriesFuture);
+        }
+
+        @Override
+        protected void configure(HolderLookup.Provider registries, Entries entries) {
+            entries.addAll(registries.lookupOrThrow(Registries.CONFIGURED_FEATURE));
+            entries.addAll(registries.lookupOrThrow(Registries.PLACED_FEATURE));
+        }
+
+        @Override
+        public String getName() {
+            return "World Gen";
+        }
     }
 
     private static class IERecipeProvider extends FabricRecipeProvider {

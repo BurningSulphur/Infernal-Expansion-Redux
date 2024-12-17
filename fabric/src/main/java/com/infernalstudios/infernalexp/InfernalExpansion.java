@@ -14,5 +14,6 @@ public class InfernalExpansion implements ModInitializer {
         ItemModuleFabric.registerItems();
         EntityTypeModuleFabric.registerEntities();
         EffectModuleFabric.registerEffects();
+        FeatureModuleFabric.registerFeatures();
     }
 }

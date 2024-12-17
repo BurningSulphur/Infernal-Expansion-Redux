@@ -1,0 +1,30 @@
+{
+  "type": "infernalexp:dullthorns",
+  "config": {
+    "size": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 7,
+        "min_inclusive": 4
+      }
+    },
+    "stem": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "infernalexp:dullthorns",
+        "Properties": {
+          "is_tip": "false"
+        }
+      }
+    },
+    "tip": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "infernalexp:dullthorns",
+        "Properties": {
+          "is_tip": "true"
+        }
+      }
+    }
+  }
+}

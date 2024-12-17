@@ -17,6 +17,7 @@ public class IECommon {
         ModEntityTypes.load();
         ModCreativeTabs.load();
 
+        ModFeatures.load();
         ModBiomes.load();
     }
 
