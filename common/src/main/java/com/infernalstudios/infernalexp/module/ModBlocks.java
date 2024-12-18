@@ -43,7 +43,7 @@ public class ModBlocks {
     public static final BlockDataHolder<?> SHIMMER_SAND = register("shimmer_sand", BlockDataHolder.of(() ->
                     new SandBlock(0xffffaa, BlockBehaviour.Properties.copy(Blocks.SAND)))
             .withModel(BlockDataHolder.Model.ROTATABLE).withItem().dropsSelf()
-            .withTags(BlockTags.MINEABLE_WITH_SHOVEL, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS)
+            .withTags(BlockTags.MINEABLE_WITH_SHOVEL, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS, BlockTags.INFINIBURN_NETHER)
             .withTranslation("Shimmer Sand")
     );
 

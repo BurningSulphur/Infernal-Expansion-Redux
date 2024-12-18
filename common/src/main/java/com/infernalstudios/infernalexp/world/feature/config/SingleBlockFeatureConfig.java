@@ -9,6 +9,6 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 public record SingleBlockFeatureConfig(BlockStateProvider block) implements FeatureConfiguration {
     public static Codec<SingleBlockFeatureConfig> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                    BlockStateProvider.CODEC.fieldOf("stem").forGetter(SingleBlockFeatureConfig::block)
+                    BlockStateProvider.CODEC.fieldOf("block").forGetter(SingleBlockFeatureConfig::block)
             ).apply(instance, SingleBlockFeatureConfig::new));
 }

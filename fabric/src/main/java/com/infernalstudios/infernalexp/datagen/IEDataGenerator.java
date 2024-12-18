@@ -45,13 +45,13 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
+        pack.addProvider(IEWorldGenProvider::new);
         pack.addProvider(IEBlockTagProvider::new);
         pack.addProvider(IEItemTagProvider::new);
         pack.addProvider(IEBlockLootTableProvider::new);
         pack.addProvider(IEModelProvider::new);
         pack.addProvider(IELangProvider::new);
         pack.addProvider(IERecipeProvider::new);
-        pack.addProvider(IEWorldGenProvider::new);
     }
 
     @Override

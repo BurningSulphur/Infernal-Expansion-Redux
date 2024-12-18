@@ -1,5 +1,6 @@
 package com.infernalstudios.infernalexp.world.feature.custom;
 
+import com.infernalstudios.infernalexp.IEConstants;
 import com.infernalstudios.infernalexp.module.ModBlocks;
 import com.infernalstudios.infernalexp.world.feature.NetherFeature;
 import com.infernalstudios.infernalexp.world.feature.config.DullthornsFeatureConfig;

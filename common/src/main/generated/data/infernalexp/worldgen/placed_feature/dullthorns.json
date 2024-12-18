@@ -3,10 +3,6 @@
   "placement": [
     {
       "type": "minecraft:biome"
-    },
-    {
-      "type": "minecraft:count",
-      "count": 10
     }
   ]
 }

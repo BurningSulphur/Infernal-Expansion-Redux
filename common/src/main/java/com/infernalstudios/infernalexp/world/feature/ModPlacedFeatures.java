@@ -35,17 +35,18 @@ public class ModPlacedFeatures {
         var configLookup = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, DULLTHORNS, configLookup.getOrThrow(ModConfiguredFeatures.DULLTHORNS),
-                BiomeFilter.biome(),
-                CountPlacement.of(10));
+                BiomeFilter.biome());
 
         register(context, LUMINOUS_FUNGUS, configLookup.getOrThrow(ModConfiguredFeatures.LUMINOUS_FUNGUS),
-                BiomeFilter.biome(),
-                CountPlacement.of(5));
+                BiomeFilter.biome());
+
+        register(context, GLOWLIGHT_FIRE, configLookup.getOrThrow(ModConfiguredFeatures.GLOWLIGHT_FIRE),
+                BiomeFilter.biome());
     }
 
 
 
     public static final ResourceKey<PlacedFeature> DULLTHORNS = create("dullthorns");
-
     public static final ResourceKey<PlacedFeature> LUMINOUS_FUNGUS = create("luminous_fungus");
+    public static final ResourceKey<PlacedFeature> GLOWLIGHT_FIRE = create("glowlight_fire");
 }

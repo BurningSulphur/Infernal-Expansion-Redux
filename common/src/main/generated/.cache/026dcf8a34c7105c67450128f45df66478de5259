@@ -1,5 +1,7 @@
-// 1.20.1	2024-12-17T22:44:03.483673	Infernal Expansion/World Gen
-d18cf90abef4f2d0ce73c6b04c2e3d2cf7ca73ea data\infernalexp\worldgen\placed_feature\luminous_fungus.json
-fb6a3eaea4f04ec368a50b5d12c507e684c92562 data\infernalexp\worldgen\configured_feature\luminous_fungus.json
-9835bb035bcd9f4a825d52b893cc45be8d8a1def data\infernalexp\worldgen\placed_feature\dullthorns.json
+// 1.20.1	2024-12-18T18:23:56.3865917	Infernal Expansion/World Gen
+d3bfc8fd9b5f9c8348471c215e2c7ca1d23ea58b data\infernalexp\worldgen\placed_feature\luminous_fungus.json
+0fd209807bb60675677a9541d563a86259878bc0 data\infernalexp\worldgen\configured_feature\luminous_fungus.json
+fd85e9758a2a11ab1093c38f9a0311db082b82b5 data\infernalexp\worldgen\placed_feature\dullthorns.json
+68f1388bc5b6aab8c3f6cfcdc15d5784d8ac4781 data\infernalexp\worldgen\placed_feature\glowlight_fire.json
 ff664f5aa90f194aa24514dcd4440f732cf76a08 data\infernalexp\worldgen\configured_feature\dullthorns.json
+b8d2613b7de0653a6b22410a1fae33d8f8971fc0 data\infernalexp\worldgen\configured_feature\glowlight_fire.json

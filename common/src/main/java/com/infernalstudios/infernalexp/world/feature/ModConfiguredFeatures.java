@@ -35,8 +35,12 @@ public class ModConfiguredFeatures {
 
         register(context, LUMINOUS_FUNGUS, NetherPlantFeature.INSTANCE,
                 new SingleBlockFeatureConfig(BlockStateProvider.simple(ModBlocks.LUMINOUS_FUNGUS.get())));
+
+        register(context, GLOWLIGHT_FIRE, NetherPlantFeature.INSTANCE,
+                new SingleBlockFeatureConfig(BlockStateProvider.simple(ModBlocks.GLOWLIGHT_FIRE.get())));
     }
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> DULLTHORNS = create("dullthorns");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LUMINOUS_FUNGUS = create("luminous_fungus");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GLOWLIGHT_FIRE = create("glowlight_fire");
 }

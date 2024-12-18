@@ -1,5 +1,6 @@
 package com.infernalstudios.infernalexp.mixin;
 
+import com.infernalstudios.infernalexp.IEConstants;
 import com.infernalstudios.infernalexp.module.ModBiomes;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceKey;
@@ -26,6 +27,7 @@ public class NetherBiomePresetMixin {
             entries.add(Pair.of(biome.getValue(), function.apply(biome.getKey())));
         }
 
+        IEConstants.LOG.info("Added biomes " + ModBiomes.getBiomeRegistry().keySet());
         cir.setReturnValue(new Climate.ParameterList<>(Collections.unmodifiableList(entries)));
     }
 }

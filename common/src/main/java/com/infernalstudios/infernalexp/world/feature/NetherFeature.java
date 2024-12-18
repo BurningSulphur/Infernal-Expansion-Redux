@@ -3,6 +3,7 @@ package com.infernalstudios.infernalexp.world.feature;
 import com.infernalstudios.infernalexp.IEConstants;
 import com.infernalstudios.infernalexp.module.ModBlocks;
 import com.infernalstudios.infernalexp.world.feature.config.DullthornsFeatureConfig;
+import com.infernalstudios.infernalexp.world.feature.config.SingleBlockFeatureConfig;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -23,6 +24,8 @@ public abstract class NetherFeature<F extends FeatureConfiguration> extends Feat
 
     @Override
     public boolean place(FeaturePlaceContext<F> context) {
+        IEConstants.LOG.info("" + context.origin());
+
         WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
 
@@ -35,7 +38,21 @@ public abstract class NetherFeature<F extends FeatureConfiguration> extends Feat
         Collections.shuffle(positions);
         pos = positions.get(0);
 
-        return this.generate(pos, context);
+        boolean success = this.generate(pos, context);
+        if (Math.random() < 0.9 && context.config() instanceof SingleBlockFeatureConfig) {
+            FeaturePlaceContext<F> contextnext =
+                    new FeaturePlaceContext<>(context.topFeature(),
+                            context.level(),
+                            context.chunkGenerator(),
+                            context.random(),
+                            context.origin().east(context.random().nextIntBetweenInclusive(-5, 5))
+                                    .north(context.random().nextIntBetweenInclusive(-5, 5)),
+                            context.config());
+            if (level.hasChunk(contextnext.origin().getX() / 16, contextnext.origin().getY() / 16))
+                success |= this.place(contextnext);
+        }
+
+        return success;
     }
 
     public abstract boolean generate(BlockPos pos, FeaturePlaceContext<F> context);

@@ -17,8 +17,8 @@ public class IECommon {
         ModEntityTypes.load();
         ModCreativeTabs.load();
 
-        ModFeatures.load();
         ModBiomes.load();
+        ModFeatures.load();
     }
 
     public static ResourceLocation id(String name) {
