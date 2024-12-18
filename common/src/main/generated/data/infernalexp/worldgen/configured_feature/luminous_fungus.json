@@ -9,6 +9,7 @@
           "is_lit": "false"
         }
       }
-    }
+    },
+    "spread": true
   }
 }

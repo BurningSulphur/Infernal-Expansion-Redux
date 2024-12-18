@@ -6,9 +6,10 @@ import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
-public record SingleBlockFeatureConfig(BlockStateProvider block) implements FeatureConfiguration {
+public record SingleBlockFeatureConfig(BlockStateProvider block, boolean spread) implements FeatureConfiguration {
     public static Codec<SingleBlockFeatureConfig> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                    BlockStateProvider.CODEC.fieldOf("block").forGetter(SingleBlockFeatureConfig::block)
+                    BlockStateProvider.CODEC.fieldOf("block").forGetter(SingleBlockFeatureConfig::block),
+                    Codec.BOOL.fieldOf("spread").forGetter(SingleBlockFeatureConfig::spread)
             ).apply(instance, SingleBlockFeatureConfig::new));
 }

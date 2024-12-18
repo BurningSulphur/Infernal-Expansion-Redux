@@ -34,10 +34,10 @@ public class ModConfiguredFeatures {
                         BlockStateProvider.simple(ModBlocks.DULLTHORNS.get().defaultBlockState().setValue(DullthornsBlock.TIP, true))));
 
         register(context, LUMINOUS_FUNGUS, NetherPlantFeature.INSTANCE,
-                new SingleBlockFeatureConfig(BlockStateProvider.simple(ModBlocks.LUMINOUS_FUNGUS.get())));
+                new SingleBlockFeatureConfig(BlockStateProvider.simple(ModBlocks.LUMINOUS_FUNGUS.get()), true));
 
         register(context, GLOWLIGHT_FIRE, NetherPlantFeature.INSTANCE,
-                new SingleBlockFeatureConfig(BlockStateProvider.simple(ModBlocks.GLOWLIGHT_FIRE.get())));
+                new SingleBlockFeatureConfig(BlockStateProvider.simple(ModBlocks.GLOWLIGHT_FIRE.get()), true));
     }
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> DULLTHORNS = create("dullthorns");

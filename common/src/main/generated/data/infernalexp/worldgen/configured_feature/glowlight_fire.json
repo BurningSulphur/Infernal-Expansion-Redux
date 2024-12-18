@@ -6,6 +6,7 @@
       "state": {
         "Name": "infernalexp:glowlight_fire"
       }
-    }
+    },
+    "spread": true
   }
 }

@@ -39,7 +39,7 @@ public abstract class NetherFeature<F extends FeatureConfiguration> extends Feat
         pos = positions.get(0);
 
         boolean success = this.generate(pos, context);
-        if (Math.random() < 0.9 && context.config() instanceof SingleBlockFeatureConfig) {
+        if (Math.random() < 0.9 && context.config() instanceof SingleBlockFeatureConfig single && single.spread()) {
             FeaturePlaceContext<F> contextnext =
                     new FeaturePlaceContext<>(context.topFeature(),
                             context.level(),
