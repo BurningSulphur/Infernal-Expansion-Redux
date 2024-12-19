@@ -22,7 +22,6 @@ public class ItemMixin {
         if (cir.getReturnValue() != InteractionResult.PASS) return;
 
         BlockPos pos = context.getClickedPos().relative(context.getClickedFace(), 1);
-        IEConstants.LOG.info("" + context.getClickedPos());
 
         if (((Item) (Object) this) == Items.QUARTZ) {
             BlockState state = ModBlocks.PLANTED_QUARTZ.get().getStateForPlacement(new BlockPlaceContext(context));

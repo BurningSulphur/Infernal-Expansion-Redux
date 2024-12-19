@@ -1,10 +1,15 @@
 package com.infernalstudios.infernalexp.world.feature;
 
 import com.infernalstudios.infernalexp.IEConstants;
+import com.infernalstudios.infernalexp.mixin.accessor.WorldGenRegionAccessor;
 import com.infernalstudios.infernalexp.world.feature.config.SingleBlockFeatureConfig;
 import com.mojang.serialization.Codec;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
+import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -44,7 +49,7 @@ public abstract class NetherFeature<F extends FeatureConfiguration> extends Feat
                             context.origin().east(context.random().nextIntBetweenInclusive(-5, 5))
                                     .north(context.random().nextIntBetweenInclusive(-5, 5)),
                             context.config());
-            if (level.ensureCanWrite(contextnext.origin()))
+            if (this.ensureCanWrite(level, contextnext.origin()))
                 success |= this.place(contextnext);
         }
 
@@ -54,4 +59,22 @@ public abstract class NetherFeature<F extends FeatureConfiguration> extends Feat
     public abstract boolean generate(BlockPos pos, FeaturePlaceContext<F> context);
 
     public abstract boolean isValidPos(LevelReader world, BlockPos pos);
+
+    public boolean ensureCanWrite(WorldGenLevel level, BlockPos pos) {
+        if (!(level instanceof WorldGenRegion world)) return true;
+
+        WorldGenRegionAccessor self = (WorldGenRegionAccessor) world;
+
+        int x = SectionPos.blockToSectionCoord(pos.getX());
+        int z = SectionPos.blockToSectionCoord(pos.getZ());
+        ChunkPos chunkPos = world.getCenter();
+        int sx = Math.abs(chunkPos.x - x);
+        int sz = Math.abs(chunkPos.z - z);
+        if (sx <= self.getWriteRadiusCutoff() && sz <= self.getWriteRadiusCutoff()) {
+            if (self.getCenter().isUpgrading())
+                return pos.getY() >= world.getMinBuildHeight() && pos.getY() < world.getMaxBuildHeight();
+            return true;
+        }
+        return false;
+    }
 }

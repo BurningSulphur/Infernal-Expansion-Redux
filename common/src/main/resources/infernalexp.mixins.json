@@ -25,6 +25,7 @@
     "accessor.TorchBlockAccessor",
     "accessor.TrapDoorBlockAccessor",
     "accessor.WallTorchBlockAccessor",
+    "accessor.WorldGenRegionAccessor",
     "registry.AbstractFurnaceBlockEntityMixin",
     "registry.AxeItemMixin",
     "registry.FireBlockMixin"
