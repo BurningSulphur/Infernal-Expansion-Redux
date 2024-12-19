@@ -22,11 +22,6 @@ public class NetherPlantFeature extends NetherFeature<SingleBlockFeatureConfig> 
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<SingleBlockFeatureConfig> context) {
-        return super.place(context);
-    }
-
-    @Override
     public boolean generate(BlockPos pos, FeaturePlaceContext<SingleBlockFeatureConfig> context) {
         SingleBlockFeatureConfig config = context.config();
         WorldGenLevel level = context.level();

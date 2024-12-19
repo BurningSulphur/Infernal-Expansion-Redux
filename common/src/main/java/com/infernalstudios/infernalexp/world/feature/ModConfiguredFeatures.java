@@ -9,6 +9,7 @@ import com.infernalstudios.infernalexp.world.feature.config.SingleBlockFeatureCo
 import com.infernalstudios.infernalexp.world.feature.custom.DullthornsFeature;
 import com.infernalstudios.infernalexp.world.feature.custom.GlowstoneSpikeFeature;
 import com.infernalstudios.infernalexp.world.feature.custom.NetherPlantFeature;
+import com.infernalstudios.infernalexp.world.feature.custom.SupportedBlockFeature;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -44,6 +45,12 @@ public class ModConfiguredFeatures {
 
         register(context, GLOWSTONE_SPIKE, GlowstoneSpikeFeature.INSTANCE,
                 new NoneFeatureConfiguration());
+
+        register(context, PLANTED_QUARTZ, SupportedBlockFeature.INSTANCE,
+                new SingleBlockFeatureConfig(BlockStateProvider.simple(ModBlocks.PLANTED_QUARTZ.get()), true));
+
+        register(context, BURIED_BONE, SupportedBlockFeature.INSTANCE,
+                new SingleBlockFeatureConfig(BlockStateProvider.simple(ModBlocks.BURIED_BONE.get()), true));
     }
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> DULLTHORNS = create("dullthorns");
@@ -51,4 +58,7 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GLOWLIGHT_FIRE = create("glowlight_fire");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> GLOWSTONE_SPIKE = create("glowstone_spike");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PLANTED_QUARTZ = create("planted_quartz");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BURIED_BONE = create("buried_bone");
 }

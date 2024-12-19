@@ -1,0 +1,8 @@
+{
+  "feature": "infernalexp:planted_quartz",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

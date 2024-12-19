@@ -1,0 +1,8 @@
+{
+  "feature": "infernalexp:buried_bone",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

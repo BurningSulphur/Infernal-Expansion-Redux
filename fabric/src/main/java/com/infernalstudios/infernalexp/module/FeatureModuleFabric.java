@@ -9,6 +9,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.Feature;
 
@@ -36,5 +37,11 @@ public class FeatureModuleFabric {
 
         BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.Biomes.IS_GLOWSTONE_CANYON),
                 GenerationStep.Decoration.UNDERGROUND_DECORATION, ModPlacedFeatures.GLOWSTONE_SPIKE);
+
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.NETHER_WASTES),
+                GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.PLANTED_QUARTZ);
+
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.SOUL_SAND_VALLEY),
+                GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.BURIED_BONE);
     }
 }

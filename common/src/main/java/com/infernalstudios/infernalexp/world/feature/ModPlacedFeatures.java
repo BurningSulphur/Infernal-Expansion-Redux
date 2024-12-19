@@ -46,6 +46,12 @@ public class ModPlacedFeatures {
         register(context, GLOWSTONE_SPIKE, configLookup.getOrThrow(ModConfiguredFeatures.GLOWSTONE_SPIKE),
                 RarityFilter.onAverageOnceEvery(3),
                 BiomeFilter.biome());
+
+        register(context, PLANTED_QUARTZ, configLookup.getOrThrow(ModConfiguredFeatures.PLANTED_QUARTZ),
+                BiomeFilter.biome());
+
+        register(context, BURIED_BONE, configLookup.getOrThrow(ModConfiguredFeatures.BURIED_BONE),
+                BiomeFilter.biome());
     }
 
 
@@ -55,4 +61,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> GLOWLIGHT_FIRE = create("glowlight_fire");
 
     public static final ResourceKey<PlacedFeature> GLOWSTONE_SPIKE = create("glowstone_spike");
+
+    public static final ResourceKey<PlacedFeature> PLANTED_QUARTZ = create("planted_quartz");
+    public static final ResourceKey<PlacedFeature> BURIED_BONE = create("buried_bone");
 }

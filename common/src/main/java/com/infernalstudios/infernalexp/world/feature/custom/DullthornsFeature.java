@@ -20,11 +20,6 @@ public class DullthornsFeature extends NetherFeature<DullthornsFeatureConfig> {
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<DullthornsFeatureConfig> context) {
-        return super.place(context);
-    }
-
-    @Override
     public boolean generate(BlockPos pos, FeaturePlaceContext<DullthornsFeatureConfig> context) {
         DullthornsFeatureConfig config = context.config();
         WorldGenLevel level = context.level();

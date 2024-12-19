@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:nether_wastes",
+  "features": "infernalexp:planted_quartz",
+  "step": "vegetal_decoration"
+}

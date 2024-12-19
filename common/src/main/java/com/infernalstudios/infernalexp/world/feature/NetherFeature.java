@@ -4,6 +4,7 @@ import com.infernalstudios.infernalexp.IEConstants;
 import com.infernalstudios.infernalexp.world.feature.config.SingleBlockFeatureConfig;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -21,8 +22,6 @@ public abstract class NetherFeature<F extends FeatureConfiguration> extends Feat
 
     @Override
     public boolean place(FeaturePlaceContext<F> context) {
-        IEConstants.LOG.info("" + context.origin());
-
         WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
 
@@ -33,7 +32,6 @@ public abstract class NetherFeature<F extends FeatureConfiguration> extends Feat
         }
         if (positions.isEmpty()) return false;
         Collections.shuffle(positions);
-        IEConstants.LOG.info(positions + "");
         pos = positions.get(0);
 
         boolean success = this.generate(pos, context);
@@ -46,7 +44,7 @@ public abstract class NetherFeature<F extends FeatureConfiguration> extends Feat
                             context.origin().east(context.random().nextIntBetweenInclusive(-5, 5))
                                     .north(context.random().nextIntBetweenInclusive(-5, 5)),
                             context.config());
-            //if (level.hasChunk(contextnext.origin().getX() / 16, contextnext.origin().getY() / 16))
+            if (level.ensureCanWrite(contextnext.origin()))
                 success |= this.place(contextnext);
         }
 

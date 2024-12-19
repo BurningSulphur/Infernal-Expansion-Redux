@@ -68,6 +68,7 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         protected void configure(HolderLookup.Provider registries, Entries entries) {
+            entries.addAll(registries.lookupOrThrow(Registries.BIOME));
             entries.addAll(registries.lookupOrThrow(Registries.CONFIGURED_FEATURE));
             entries.addAll(registries.lookupOrThrow(Registries.PLACED_FEATURE));
         }

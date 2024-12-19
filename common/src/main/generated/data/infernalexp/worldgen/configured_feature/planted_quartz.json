@@ -1,0 +1,15 @@
+{
+  "type": "infernalexp:supported_block",
+  "config": {
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "infernalexp:planted_quartz",
+        "Properties": {
+          "facing": "down"
+        }
+      }
+    },
+    "spread": true
+  }
+}

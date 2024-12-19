@@ -55,7 +55,7 @@ public class GlowstoneSpikeFeature extends NetherFeature<NoneFeatureConfiguratio
                     BlockPos b = line.get(i);
                     BlockState state;
 
-                    float chance = (float) i / line.size() + random.nextFloat() * 0.15f - 0.3f;
+                    float chance = (float) i / line.size() + random.nextFloat() * 0.3f - 0.15f;
                     if (dark) chance = 1 - chance;
 
                     if (chance <= 0.33) state = glowstone;

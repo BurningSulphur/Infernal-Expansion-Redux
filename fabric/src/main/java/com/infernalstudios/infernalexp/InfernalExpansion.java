@@ -8,12 +8,13 @@ public class InfernalExpansion implements ModInitializer {
     
     @Override
     public void onInitialize() {
+        FeatureModuleFabric.registerFeatures();
+
         IECommon.init();
 
         BlockModuleFabric.registerBlocks();
         ItemModuleFabric.registerItems();
         EntityTypeModuleFabric.registerEntities();
         EffectModuleFabric.registerEffects();
-        FeatureModuleFabric.registerFeatures();
     }
 }
