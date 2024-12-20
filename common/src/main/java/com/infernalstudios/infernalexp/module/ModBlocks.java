@@ -54,9 +54,8 @@ public class ModBlocks {
             .withTranslation("Shimmer Sheet")
     );
 
-    // TODO: Give it special falling properties
     public static final BlockDataHolder<?> GLIMMER_GRAVEL = register("glimmer_gravel", BlockDataHolder.of(() ->
-                    new Block(BlockBehaviour.Properties.copy(Blocks.SAND)))
+                    new GlimmerGravelBlock(BlockBehaviour.Properties.copy(Blocks.SAND)))
             .withModel(BlockDataHolder.Model.ROTATABLE).withItem().dropsSelf()
             .withTags(BlockTags.MINEABLE_WITH_SHOVEL, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS)
             .withTranslation("Glimmer Gravel")
