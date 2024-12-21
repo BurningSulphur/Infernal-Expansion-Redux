@@ -13,7 +13,5 @@ public class InfernalExpansion {
     public InfernalExpansion() {
         IECommon.init();
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> InfernalExpansionForgeClient::init);
-
-
     }
 }

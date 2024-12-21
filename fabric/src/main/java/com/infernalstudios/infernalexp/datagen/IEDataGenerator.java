@@ -273,9 +273,6 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
 
             getOrCreateTagBuilder(ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS)
                     .add(Blocks.GLOWSTONE);
-
-            getOrCreateTagBuilder(ModTags.Blocks.GLOWSTONE_CANYON_CARVER_REPLACEABLES)
-                    .forceAddTag(BlockTags.NETHER_CARVER_REPLACEABLES);
         }
     }
 
