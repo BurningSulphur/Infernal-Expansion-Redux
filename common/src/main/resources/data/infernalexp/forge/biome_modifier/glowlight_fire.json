@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#infernalexp:is_glowstone_canyon",
-  "features": "infernalexp:glowlight_fire",
-  "step": "vegetal_decoration"
-}

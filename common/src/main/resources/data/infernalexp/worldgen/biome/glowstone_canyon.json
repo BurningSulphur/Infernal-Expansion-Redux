@@ -30,9 +30,15 @@
     [],
     [],
     [],
+    [
+      "infernalexp:glowstone_spike"
+    ],
     [],
-    [],
-    [],
+    [
+      "infernalexp:dullthorns",
+      "infernalexp:glowlight_fire",
+      "infernalexp:luminous_fungus"
+    ],
     []
   ],
   "has_precipitation": false,

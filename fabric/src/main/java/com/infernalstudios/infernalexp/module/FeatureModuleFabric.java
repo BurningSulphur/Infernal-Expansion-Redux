@@ -26,18 +26,6 @@ public class FeatureModuleFabric {
     }
 
     private static void registerPlacement() {
-        BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.Biomes.IS_GLOWSTONE_CANYON),
-                GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.DULLTHORNS);
-
-        BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.Biomes.IS_GLOWSTONE_CANYON),
-                GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.LUMINOUS_FUNGUS);
-
-        BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.Biomes.IS_GLOWSTONE_CANYON),
-                GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.GLOWLIGHT_FIRE);
-
-        BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.Biomes.IS_GLOWSTONE_CANYON),
-                GenerationStep.Decoration.UNDERGROUND_DECORATION, ModPlacedFeatures.GLOWSTONE_SPIKE);
-
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.NETHER_WASTES),
                 GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.PLANTED_QUARTZ);
 
