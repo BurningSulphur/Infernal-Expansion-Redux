@@ -46,7 +46,10 @@
       "infernalexp:glowlight_fire",
       "infernalexp:luminous_fungus"
     ],
-    []
+    [
+      "minecraft:glowstone_extra",
+      "minecraft:glowstone"
+    ]
   ],
   "has_precipitation": false,
   "spawn_costs": {},

@@ -10,6 +10,7 @@
     "BlockEntityTypeMixin",
     "BoneMealItemMixin",
     "EntityMixin",
+    "GlowstoneFeatureMixin",
     "ItemMixin",
     "LivingEntityMixin",
     "MinecraftServerMixin",

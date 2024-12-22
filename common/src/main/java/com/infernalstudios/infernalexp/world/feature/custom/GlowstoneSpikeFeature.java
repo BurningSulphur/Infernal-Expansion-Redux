@@ -31,9 +31,9 @@ public class GlowstoneSpikeFeature extends NetherFeature<NoneFeatureConfiguratio
 
         BlockPos tip = pos.offset(random.nextInt(16) - 8, 0, random.nextInt(16) - 8);
         if (!world.isEmptyBlock(pos.below()))
-            tip = tip.above(random.nextInt(5) + 12);
+            tip = tip.above(random.nextInt(10) + 10);
         else
-            tip = tip.below(random.nextInt(5) + 12);
+            tip = tip.below(random.nextInt(10) + 10);
         if (!world.isEmptyBlock(tip)) return false;
 
         BlockState glowstone = Blocks.GLOWSTONE.defaultBlockState();

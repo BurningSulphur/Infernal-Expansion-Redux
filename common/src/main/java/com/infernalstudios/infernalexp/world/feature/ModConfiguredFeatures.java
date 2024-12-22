@@ -50,8 +50,8 @@ public class ModConfiguredFeatures {
                         BlockStateProvider.simple(Blocks.AIR.defaultBlockState()),
                         new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                                 .add(ModBlocks.GLOWSILK_COCOON.get().defaultBlockState(), 1)
-                                .add(ModBlocks.GLOWLIGHT_FIRE.get().defaultBlockState(), 4)
-                                .add(Blocks.AIR.defaultBlockState(), 8))));
+                                .add(ModBlocks.GLOWLIGHT_FIRE.get().defaultBlockState(), 6)
+                                .add(Blocks.AIR.defaultBlockState(), 12))));
 
         register(context, PLANTED_QUARTZ, SupportedBlockFeature.INSTANCE,
                 new SingleBlockFeatureConfig(BlockStateProvider.simple(ModBlocks.PLANTED_QUARTZ.get()), true));

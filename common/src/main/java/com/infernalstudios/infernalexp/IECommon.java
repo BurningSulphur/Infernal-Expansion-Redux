@@ -10,7 +10,6 @@ public class IECommon {
         ModItems.load();
 
         ModFireTypes.load();
-        ModParticles.load();
 
         ModEntityTypes.load();
         ModCreativeTabs.load();

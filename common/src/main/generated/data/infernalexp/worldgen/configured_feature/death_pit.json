@@ -30,13 +30,13 @@
           "data": {
             "Name": "infernalexp:glowlight_fire"
           },
-          "weight": 2
+          "weight": 6
         },
         {
           "data": {
             "Name": "minecraft:air"
           },
-          "weight": 5
+          "weight": 12
         }
       ]
     }
