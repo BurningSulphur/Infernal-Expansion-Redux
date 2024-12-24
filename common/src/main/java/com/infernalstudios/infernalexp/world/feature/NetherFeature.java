@@ -46,7 +46,7 @@ public abstract class NetherFeature<F extends FeatureConfiguration> extends Feat
                             context.origin().east(context.random().nextIntBetweenInclusive(-4, 4))
                                     .north(context.random().nextIntBetweenInclusive(-4, 4)),
                             context.config());
-            if (this.ensureCanWrite(level, contextnext.origin()))
+            if (ensureCanWrite(level, contextnext.origin()))
                 success |= this.place(contextnext);
         }
 
@@ -57,7 +57,8 @@ public abstract class NetherFeature<F extends FeatureConfiguration> extends Feat
 
     public abstract boolean isValidPos(LevelReader world, BlockPos pos);
 
-    public boolean ensureCanWrite(WorldGenLevel level, BlockPos pos) {
+
+    private static boolean ensureCanWrite(WorldGenLevel level, BlockPos pos) {
         if (!(level instanceof WorldGenRegion world)) return true;
 
         WorldGenRegionAccessor self = (WorldGenRegionAccessor) world;

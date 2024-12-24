@@ -41,7 +41,7 @@ public class ModConfiguredFeatures {
                         BlockStateProvider.simple(ModBlocks.DULLTHORNS.get()),
                         BlockStateProvider.simple(ModBlocks.DULLTHORNS.get().defaultBlockState().setValue(DullthornsBlock.TIP, true))));
 
-        register(context, LUMINOUS_FUNGUS, NetherPlantFeature.INSTANCE,
+        register(context, LUMINOUS_FUNGUS, SupportedBlockFeature.INSTANCE,
                 new SingleBlockFeatureConfig(BlockStateProvider.simple(ModBlocks.LUMINOUS_FUNGUS.get()), true));
 
         register(context, GLOWLIGHT_FIRE, NetherPlantFeature.INSTANCE,

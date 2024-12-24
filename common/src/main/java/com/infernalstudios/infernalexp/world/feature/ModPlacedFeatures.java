@@ -37,13 +37,15 @@ public class ModPlacedFeatures {
                 InSquarePlacement.spread());
 
         register(context, LUMINOUS_FUNGUS, configLookup.getOrThrow(ModConfiguredFeatures.LUMINOUS_FUNGUS),
+                RarityFilter.onAverageOnceEvery(2),
                 BiomeFilter.biome());
 
         register(context, GLOWLIGHT_FIRE, configLookup.getOrThrow(ModConfiguredFeatures.GLOWLIGHT_FIRE),
+                RarityFilter.onAverageOnceEvery(2),
                 BiomeFilter.biome());
 
     register(context, HANGING_BROWN_MUSHROOM, configLookup.getOrThrow(ModConfiguredFeatures.HANGING_BROWN_MUSHROOM),
-                RarityFilter.onAverageOnceEvery(5),
+                RarityFilter.onAverageOnceEvery(4),
                 BiomeFilter.biome(),
                 InSquarePlacement.spread());
 

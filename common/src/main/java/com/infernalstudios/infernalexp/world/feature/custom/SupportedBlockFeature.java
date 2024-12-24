@@ -1,5 +1,6 @@
 package com.infernalstudios.infernalexp.world.feature.custom;
 
+import com.infernalstudios.infernalexp.block.LuminousFungusBlock;
 import com.infernalstudios.infernalexp.block.SupportedBlock;
 import com.infernalstudios.infernalexp.world.feature.NetherFeature;
 import com.infernalstudios.infernalexp.world.feature.config.SingleBlockFeatureConfig;
@@ -32,6 +33,11 @@ public class SupportedBlockFeature extends NetherFeature<SingleBlockFeatureConfi
 
         BlockState state = context.config().block().getState(random, pos);
         if (state.hasProperty(SupportedBlock.FACING)) state = state.setValue(SupportedBlock.FACING, dir);
+        if (state.hasProperty(LuminousFungusBlock.FLOOR)) {
+            if (dir.getAxis() == Direction.Axis.Y)
+                state = state.setValue(LuminousFungusBlock.FLOOR, dir == Direction.DOWN);
+            else return true;
+        }
 
         this.setBlock(world, pos, state);
 
