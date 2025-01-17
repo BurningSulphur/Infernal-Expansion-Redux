@@ -1,0 +1,24 @@
+package com.infernalstudios.infernalexp.module;
+
+import com.infernalstudios.infernalexp.IEConstants;
+import com.infernalstudios.infernalexp.mixin.accessor.SimpleParticleTypeAccessor;
+import com.infernalstudios.infernalexp.registration.util.RegistrationProvider;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.Registries;
+
+public class ModParticleTypes {
+    /** Map of all Particle Resource Locations to their Suppliers. */
+    private static final RegistrationProvider<ParticleType<?>> PARTICLE_TYPE_REGISTRY = RegistrationProvider.get(Registries.PARTICLE_TYPE, IEConstants.MOD_ID);
+
+    public static <T extends ParticleType<?>> T register(String name, T particle) {
+        PARTICLE_TYPE_REGISTRY.register(name, () -> particle);
+        return particle;
+    }
+
+    // Called in the mod initializer / constructor in order to make sure that items are registered
+    public static void load() {}
+
+    public static final SimpleParticleType GLOWSTONE_SPARKLE = register("glowstone_sparkle", SimpleParticleTypeAccessor.createSimpleParticleType(false));
+    public static final SimpleParticleType INFECTION = register("infection", SimpleParticleTypeAccessor.createSimpleParticleType(false));
+}

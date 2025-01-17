@@ -233,13 +233,13 @@ public class ModBlocks {
     );
 
     public static final BlockDataHolder<?> GLOWLIGHT_TORCH = register("glowlight_torch", BlockDataHolder.of(() ->
-                    TorchBlockAccessor.createTorchBlock(BlockBehaviour.Properties.copy(Blocks.FIRE), ParticleTypes.ELECTRIC_SPARK))
+                    TorchBlockAccessor.createTorchBlock(BlockBehaviour.Properties.copy(Blocks.FIRE), ModParticleTypes.GLOWSTONE_SPARKLE))
             .cutout()
             .withTranslation("Glowlight Torch")
     );
 
     public static final BlockDataHolder<?> GLOWLIGHT_WALL_TORCH = register("glowlight_wall_torch", BlockDataHolder.of(() ->
-                    WallTorchBlockAccessor.createWallTorchBlock(BlockBehaviour.Properties.copy(Blocks.FIRE), ParticleTypes.ELECTRIC_SPARK))
+                    WallTorchBlockAccessor.createWallTorchBlock(BlockBehaviour.Properties.copy(Blocks.FIRE), ModParticleTypes.GLOWSTONE_SPARKLE))
             .cutout()
     );
 

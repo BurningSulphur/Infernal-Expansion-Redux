@@ -23,6 +23,7 @@
     "accessor.IronBarsBlockAccessor",
     "accessor.NoiseGeneratorSettingsAccessor",
     "accessor.PressurePlateBlockAccessor",
+    "accessor.SimpleParticleTypeAccessor",
     "accessor.StairBlockAccessor",
     "accessor.TorchBlockAccessor",
     "accessor.TrapDoorBlockAccessor",
