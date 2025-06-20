@@ -24,9 +24,9 @@ public class EffectModuleFabric {
 
                 Potion base = Registry.register(BuiltInRegistries.POTION, entry.getKey(),
                         new Potion(new MobEffectInstance(entry.getValue().get(), 3600)));
-                Potion long_ = Registry.register(BuiltInRegistries.POTION, IECommon.id("long_" + id),
+                Potion long_ = Registry.register(BuiltInRegistries.POTION, IECommon.makeID("long_" + id),
                         new Potion(id, new MobEffectInstance(entry.getValue().get(), 9600)));
-                Potion strong = Registry.register(BuiltInRegistries.POTION, IECommon.id("strong_" + id),
+                Potion strong = Registry.register(BuiltInRegistries.POTION, IECommon.makeID("strong_" + id),
                         new Potion(id, new MobEffectInstance(entry.getValue().get(), 1800, 1)));
 
                 PotionBrewing.addMix(Potions.AWKWARD, entry.getValue().getPotionIngredient().get(), base);

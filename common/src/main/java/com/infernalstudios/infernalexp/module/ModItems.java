@@ -16,7 +16,7 @@ public class ModItems {
     private static final Map<ResourceLocation, ItemDataHolder<?>> ITEM_REGISTRY = new HashMap<>();
 
     public static ItemDataHolder<?> register(String name, ItemDataHolder<?> itemDataHolder) {
-        return register(IECommon.id(name), itemDataHolder);
+        return register(IECommon.makeID(name), itemDataHolder);
     }
 
     public static ItemDataHolder<?> register(ResourceLocation id, ItemDataHolder<?> itemDataHolder) {

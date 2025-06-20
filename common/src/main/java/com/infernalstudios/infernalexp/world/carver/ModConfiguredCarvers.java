@@ -17,7 +17,7 @@ import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 
 public class ModConfiguredCarvers {
     public static ResourceKey<ConfiguredWorldCarver<?>> create(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_CARVER, IECommon.id(name));
+        return ResourceKey.create(Registries.CONFIGURED_CARVER, IECommon.makeID(name));
     }
 
     private static <CC extends CarverConfiguration, C extends WorldCarver<CC>> void register(BootstapContext<ConfiguredWorldCarver<?>> context,

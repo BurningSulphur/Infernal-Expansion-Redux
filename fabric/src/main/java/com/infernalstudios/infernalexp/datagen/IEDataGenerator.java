@@ -97,7 +97,7 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
                     .unlockedBy(getHasName(a), has(a))
                     .unlockedBy(getHasName(b), has(b))
                     .group(getName(result))
-                    .save(exporter, IECommon.id(getName(result)));
+                    .save(exporter, IECommon.makeID(getName(result)));
         }
 
         private static void offer2x2Recipe(Consumer<FinishedRecipe> exporter, ItemLike to, int count,
@@ -108,7 +108,7 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
                     .define('#', from)
                     .unlockedBy(getHasName(from), has(from))
                     .group(getName(to))
-                    .save(exporter, IECommon.id(getName(to)));
+                    .save(exporter, IECommon.makeID(getName(to)));
         }
 
         private static void offer3x3Recipe(Consumer<FinishedRecipe> exporter, ItemLike to, int count,
@@ -117,7 +117,7 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
                     .requires(from, 9)
                     .unlockedBy(getHasName(from), has(from))
                     .group(getName(to))
-                    .save(exporter, IECommon.id(getName(to)));
+                    .save(exporter, IECommon.makeID(getName(to)));
         }
 
         private static void offerUnpackRecipe(Consumer<FinishedRecipe> exporter, ItemLike to, int count, ItemLike from) {
@@ -125,7 +125,7 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
                     .requires(from)
                     .unlockedBy(getHasName(from), has(from))
                     .group(getName(to))
-                    .save(exporter, IECommon.id(getName(to)));
+                    .save(exporter, IECommon.makeID(getName(to)));
         }
 
         @Override
@@ -135,13 +135,13 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
                     stairBuilder(block.getStairs().get(), Ingredient.of(block.get()))
                             .group(getName(block.getStairs().get()))
                             .unlockedBy(getHasName(block.get()), has(block.get()))
-                            .save(exporter, IECommon.id(getName(block.getStairs().get())));
+                            .save(exporter, IECommon.makeID(getName(block.getStairs().get())));
                 }
                 if (block.getSlab() != null) {
                     slabBuilder(RecipeCategory.BUILDING_BLOCKS, block.getSlab().get(), Ingredient.of(block.get()))
                             .group(getName(block.getSlab().get()))
                             .unlockedBy(getHasName(block.get()), has(block.get()))
-                            .save(exporter, IECommon.id(getName(block.getSlab().get())));
+                            .save(exporter, IECommon.makeID(getName(block.getSlab().get())));
                 }
                 if (block.getPaneBlock() != null) {
                     ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, block.getPaneBlock().get(), 16)
@@ -150,7 +150,7 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
                             .define('#', block.get())
                             .group(getName(block.getPaneBlock().get()))
                             .unlockedBy("has_glass", has(block.get()))
-                            .save(exporter, IECommon.id(getName(block.getPaneBlock().get())));
+                            .save(exporter, IECommon.makeID(getName(block.getPaneBlock().get())));
                 }
             }
 
@@ -159,18 +159,18 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
                     .pattern("###")
                     .define('#', ModBlocks.SHIMMER_SAND.get())
                     .unlockedBy(getHasName(ModBlocks.SHIMMER_SAND.get()), has(ModBlocks.SHIMMER_SAND.get()))
-                    .group("shimmer_sheet").save(exporter, IECommon.id("shimmer_sheet"));
+                    .group("shimmer_sheet").save(exporter, IECommon.makeID("shimmer_sheet"));
 
             offer2x2Recipe(exporter, ModBlocks.SHIMMER_STONE_BRICKS.get(), 4, ModBlocks.SHIMMER_SAND.get());
 
             buttonBuilder(ModBlocks.DULLSTONE_BUTTON.get(), Ingredient.of(ModBlocks.POLISHED_DULLSTONE.get()))
                     .group(getName(ModBlocks.DULLSTONE_BUTTON.get()))
                     .unlockedBy(getHasName(ModBlocks.POLISHED_DULLSTONE.get()), has(ModBlocks.POLISHED_DULLSTONE.get()))
-                    .save(exporter, IECommon.id(getName(ModBlocks.DULLSTONE_BUTTON.get())));
+                    .save(exporter, IECommon.makeID(getName(ModBlocks.DULLSTONE_BUTTON.get())));
             pressurePlateBuilder(RecipeCategory.REDSTONE, ModBlocks.DULLSTONE_PRESSURE_PLATE.get(), Ingredient.of(ModBlocks.POLISHED_DULLSTONE.get()))
                     .group(getName(ModBlocks.DULLSTONE_PRESSURE_PLATE.get()))
                     .unlockedBy(getHasName(ModBlocks.POLISHED_DULLSTONE.get()), has(ModBlocks.POLISHED_DULLSTONE.get()))
-                    .save(exporter, IECommon.id(getName(ModBlocks.DULLSTONE_PRESSURE_PLATE.get())));
+                    .save(exporter, IECommon.makeID(getName(ModBlocks.DULLSTONE_PRESSURE_PLATE.get())));
 
             offer2x2Recipe(exporter, ModBlocks.POLISHED_GLOWSTONE.get(), 4, Blocks.GLOWSTONE);
 

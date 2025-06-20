@@ -1,22 +1,10 @@
 package com.infernalstudios.infernalexp.module;
 
 import com.infernalstudios.infernalexp.IECommon;
-import com.infernalstudios.infernalexp.potion.PotionRecipe;
-import com.infernalstudios.infernalexp.registration.FuelRegistry;
-import com.infernalstudios.infernalexp.registration.holders.ItemDataHolder;
 import com.infernalstudios.infernalexp.registration.holders.MobEffectDataHolder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionBrewing;
-import net.minecraft.world.item.alchemy.Potions;
-import net.minecraftforge.common.brewing.BrewingRecipe;
-import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
-import net.minecraftforge.common.brewing.VanillaBrewingRecipe;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -37,9 +25,9 @@ public class EffectModuleForge {
 
                 event.register(ForgeRegistries.POTIONS.getRegistryKey(), entry.getKey(), () ->
                         new Potion(new MobEffectInstance(entry.getValue().get(), 3600)));
-                event.register(ForgeRegistries.POTIONS.getRegistryKey(), IECommon.id("long_" + id), () ->
+                event.register(ForgeRegistries.POTIONS.getRegistryKey(), IECommon.makeID("long_" + id), () ->
                         new Potion(id, new MobEffectInstance(entry.getValue().get(), 9600)));
-                event.register(ForgeRegistries.POTIONS.getRegistryKey(), IECommon.id("strong_" + id), () ->
+                event.register(ForgeRegistries.POTIONS.getRegistryKey(), IECommon.makeID("strong_" + id), () ->
                         new Potion(id, new MobEffectInstance(entry.getValue().get(), 1800, 1)));
             }
         }

@@ -1,6 +1,7 @@
 package com.infernalstudios.infernalexp.module;
 
 import com.infernalstudios.infernalexp.IECommon;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
@@ -14,7 +15,7 @@ public class ModBiomes {
     private static final Map<ResourceKey<Biome>, Climate.ParameterPoint> BIOME_REGISTRY = new HashMap<>();
 
     public static ResourceKey<Biome> register(String name, Climate.ParameterPoint parameterPoint) {
-        return register(ResourceKey.create(Registries.BIOME, IECommon.id(name)), parameterPoint);
+        return register(ResourceKey.create(Registries.BIOME, IECommon.makeID(name)), parameterPoint);
     }
 
     public static ResourceKey<Biome> register(ResourceKey<Biome> id, Climate.ParameterPoint parameterPoint) {

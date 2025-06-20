@@ -15,7 +15,7 @@ public class ModEffects {
     private static final Map<ResourceLocation, MobEffectDataHolder<?>> EFFECT_REGISTRY = new HashMap<>();
 
     public static MobEffectDataHolder<?> register(String name, MobEffectDataHolder<?> effect) {
-        ResourceLocation id = IECommon.id(name);
+        ResourceLocation id = IECommon.makeID(name);
         EFFECT_REGISTRY.put(id, effect);
         return effect;
     }

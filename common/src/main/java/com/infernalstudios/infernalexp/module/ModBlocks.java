@@ -5,7 +5,6 @@ import com.infernalstudios.infernalexp.block.*;
 import com.infernalstudios.infernalexp.mixin.accessor.*;
 import com.infernalstudios.infernalexp.registration.holders.BlockDataHolder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
@@ -27,7 +26,7 @@ public class ModBlocks {
     private static final Map<ResourceLocation, BlockDataHolder<?>> BLOCK_REGISTRY = new HashMap<>();
 
     public static BlockDataHolder<?> register(String name, BlockDataHolder<?> blockDataHolder) {
-        ResourceLocation id = IECommon.id(name);
+        ResourceLocation id = IECommon.makeID(name);
         BLOCK_REGISTRY.put(id, blockDataHolder);
         return blockDataHolder;
     }

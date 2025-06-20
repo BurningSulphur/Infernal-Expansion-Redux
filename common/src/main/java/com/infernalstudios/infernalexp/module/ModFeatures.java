@@ -14,7 +14,7 @@ public class ModFeatures {
     private static final Map<ResourceKey<Feature<?>>, Feature<?>> FEATURE_REGISTRY = new HashMap<>();
 
     public static Feature<?> register(String name, Feature<?> feature) {
-        return register(ResourceKey.create(Registries.FEATURE, IECommon.id(name)), feature);
+        return register(ResourceKey.create(Registries.FEATURE, IECommon.makeID(name)), feature);
     }
 
     public static Feature<?> register(ResourceKey<Feature<?>> id, Feature<?> feature) {

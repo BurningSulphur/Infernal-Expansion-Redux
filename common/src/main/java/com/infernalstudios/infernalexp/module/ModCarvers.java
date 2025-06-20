@@ -14,7 +14,7 @@ public class ModCarvers {
     private static final Map<ResourceKey<WorldCarver<?>>, WorldCarver<?>> CARVER_REGISTRY = new HashMap<>();
 
     public static ResourceKey<WorldCarver<?>> register(String name, WorldCarver<?> parameterPoint) {
-        return register(ResourceKey.create(Registries.CARVER, IECommon.id(name)), parameterPoint);
+        return register(ResourceKey.create(Registries.CARVER, IECommon.makeID(name)), parameterPoint);
     }
 
     public static ResourceKey<WorldCarver<?>> register(ResourceKey<WorldCarver<?>> id, WorldCarver<?> parameterPoint) {

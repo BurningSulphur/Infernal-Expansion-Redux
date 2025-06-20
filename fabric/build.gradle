@@ -19,6 +19,8 @@ dependencies {
     compileOnly project(":common")
 
     modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${fabric_geckolib_version}"
+
+    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.4.1")))
 }
 
 fabricApi {

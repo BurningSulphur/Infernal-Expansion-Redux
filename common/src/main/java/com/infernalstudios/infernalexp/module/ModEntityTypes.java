@@ -21,7 +21,7 @@ public class ModEntityTypes {
 */
 
     public static EntityTypeDataHolder register(String name, EntityTypeDataHolder entityTypeDataHolder) {
-        ResourceLocation id = IECommon.id(name);
+        ResourceLocation id = IECommon.makeID(name);
         ENTITY_TYPE_REGISTRY.put(id, entityTypeDataHolder);
         return entityTypeDataHolder;
     }

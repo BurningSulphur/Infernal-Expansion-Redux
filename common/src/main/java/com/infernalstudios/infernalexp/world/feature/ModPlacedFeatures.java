@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ModPlacedFeatures {
     public static ResourceKey<PlacedFeature> create(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, IECommon.id(name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, IECommon.makeID(name));
     }
 
     private static void register(BootstapContext<PlacedFeature> context,

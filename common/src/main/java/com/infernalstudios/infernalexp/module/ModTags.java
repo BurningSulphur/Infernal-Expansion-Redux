@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.Block;
 public class ModTags {
     public static class Blocks {
         public static TagKey<Block> create(String name) {
-            return TagKey.create(Registries.BLOCK, IECommon.id(name));
+            return TagKey.create(Registries.BLOCK, IECommon.makeID(name));
         }
 
         public static final TagKey<Block> GLOW_FIRE_BASE_BLOCKS = create("glowlight_fire_base_blocks");
@@ -19,7 +19,7 @@ public class ModTags {
 
     public static class Biomes {
         public static TagKey<Biome> create(String name) {
-            return TagKey.create(Registries.BIOME, IECommon.id(name));
+            return TagKey.create(Registries.BIOME, IECommon.makeID(name));
         }
 
         public static final TagKey<Biome> IS_GLOWSTONE_CANYON = create("is_glowstone_canyon");
