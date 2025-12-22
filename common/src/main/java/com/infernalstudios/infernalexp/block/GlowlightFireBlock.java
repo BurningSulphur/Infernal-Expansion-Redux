@@ -2,9 +2,13 @@ package com.infernalstudios.infernalexp.block;
 
 import com.infernalstudios.infernalexp.module.ModTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class GlowlightFireBlock extends BaseFireBlock {
     public GlowlightFireBlock(Properties properties, float damage) {
@@ -12,12 +16,17 @@ public class GlowlightFireBlock extends BaseFireBlock {
     }
 
     @Override
-    protected boolean canBurn(BlockState state) {
+    protected boolean canBurn(@NotNull BlockState state) {
         return true;
     }
 
     @Override
-    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+    public @NotNull BlockState updateShape(@NotNull BlockState state, @NotNull Direction direction, @NotNull BlockState neighborState, @NotNull LevelAccessor level, @NotNull BlockPos currentPos, @NotNull BlockPos neighborPos) {
+        return direction == Direction.DOWN && !this.canSurvive(state, level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+    }
+
+    @Override
+    public boolean canSurvive(@NotNull BlockState state, LevelReader world, BlockPos pos) {
         return canSurviveOnBlock(world.getBlockState(pos.below()));
     }
 
