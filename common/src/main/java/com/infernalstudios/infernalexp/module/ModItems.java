@@ -1,19 +1,28 @@
 package com.infernalstudios.infernalexp.module;
 
 import com.infernalstudios.infernalexp.IECommon;
+import com.infernalstudios.infernalexp.items.EntityBucketItem;
 import com.infernalstudios.infernalexp.registration.holders.ItemDataHolder;
 import net.minecraft.core.Direction;
+import net.minecraft.data.models.model.ModelTemplate;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.StandingAndWallBlockItem;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class ModItems {
-    /** Map of all Item Resource Locations to their ItemDataHolders. */
+    /**
+     * Map of all Item Resource Locations to their ItemDataHolders.
+     */
     private static final Map<ResourceLocation, ItemDataHolder<?>> ITEM_REGISTRY = new HashMap<>();
+    public static final ModelTemplate SPAWN_EGG = new ModelTemplate(Optional.of(new ResourceLocation("minecraft", "item/template_spawn_egg")), Optional.empty());
 
     public static ItemDataHolder<?> register(String name, ItemDataHolder<?> itemDataHolder) {
         return register(IECommon.makeID(name), itemDataHolder);
@@ -49,6 +58,28 @@ public class ModItems {
                     new StandingAndWallBlockItem(ModBlocks.GLOWLIGHT_TORCH.get(), ModBlocks.GLOWLIGHT_WALL_TORCH.get(),
                             new Item.Properties(), Direction.DOWN))
             .withModel(ModelTemplates.FLAT_ITEM)
+    );
+
+    public static final ItemDataHolder<?> VOLINE_BUCKET = register("voline_bucket", ItemDataHolder.of(() ->
+                    new EntityBucketItem(
+                            ModEntityTypes.VOLINE::get,
+                            Fluids.LAVA,
+                            () -> SoundEvents.BUCKET_EMPTY_LAVA,
+                            new Item.Properties().stacksTo(1)
+                    ))
+            .withModel(ModelTemplates.FLAT_ITEM)
+            .withTranslation("Voline Bucket")
+    );
+
+    public static final ItemDataHolder<?> VOLINE_SPAWN_EGG = register("voline_spawn_egg", ItemDataHolder.of(() ->
+                    new SpawnEggItem(
+                            ModEntityTypes.VOLINE.get(),
+                            0x2E2631,
+                            0x652833,
+                            new Item.Properties()
+                    ))
+            .withModel(SPAWN_EGG)
+            .withTranslation("Voline Spawn Egg")
     );
 
     public static final ItemDataHolder<?> GLOWSILK_STRING = register("glowsilk_string", ItemDataHolder.of(() ->

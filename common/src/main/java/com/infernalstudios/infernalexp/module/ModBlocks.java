@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -212,7 +213,7 @@ public class ModBlocks {
     public static final BlockDataHolder<?> DULLTHORNS_BLOCK = register("dullthorns_block", BlockDataHolder.of(() ->
                     new Block(dullthornsBlock) {
                         @Override
-                        public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
+                        public void stepOn(@NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Entity entity) {
                             super.stepOn(world, pos, state, entity);
                             DullthornsBlock.applyEffect(entity);
                         }
@@ -342,4 +343,11 @@ public class ModBlocks {
             .withTags(BlockTags.MINEABLE_WITH_PICKAXE)
             .withTranslation("Basalt Bricks")
     );
+
+    public static final BlockDataHolder<?> VOLATILE_GEYSER = register("volatile_geyser", BlockDataHolder.of(() ->
+            new VolatileGeyserBlock(BlockBehaviour.Properties.copy(Blocks.STONE))))
+            .withModel(BlockDataHolder.Model.CUBE).withItem().dropsSelf()
+            .withTags(BlockTags.MINEABLE_WITH_PICKAXE)
+            .withTranslation("Volatile Geyser");
+
 }

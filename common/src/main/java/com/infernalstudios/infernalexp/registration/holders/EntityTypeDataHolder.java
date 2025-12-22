@@ -16,6 +16,7 @@ import java.util.function.Supplier;
 public class EntityTypeDataHolder<T extends Entity> {
     private EntityType<T> cachedEntry;
     private final Supplier<EntityType<T>> entrySupplier;
+    private String defaultTranslation;
 
     private Supplier<AttributeSupplier.Builder> attributesBuilderSupplier;
 
@@ -25,6 +26,19 @@ public class EntityTypeDataHolder<T extends Entity> {
 
     public static <U extends Entity> EntityTypeDataHolder<U> of(Supplier<EntityType<U>> entityTypeSupplier) {
         return new EntityTypeDataHolder<>(entityTypeSupplier);
+    }
+
+    public EntityTypeDataHolder<T> withTranslation(String translation) {
+        this.defaultTranslation = translation;
+        return this;
+    }
+
+    public boolean hasTranslation() {
+        return this.defaultTranslation != null;
+    }
+
+    public String getTranslation() {
+        return this.defaultTranslation;
     }
 
     /**
