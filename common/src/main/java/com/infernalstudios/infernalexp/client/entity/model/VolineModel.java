@@ -73,7 +73,7 @@ public class VolineModel<T extends VolineEntity> extends HierarchicalModel<T> {
     }
 
     @Override
-    public ModelPart root() {
+    public @NotNull ModelPart root() {
         return this.root;
     }
 
