@@ -1,15 +1,11 @@
 package com.infernalstudios.infernalexp.fabric;
 
 import com.infernalstudios.infernalexp.IECommon;
-import com.infernalstudios.infernalexp.entities.VolineEntity;
 import com.infernalstudios.infernalexp.fabric.module.*;
 import com.infernalstudios.infernalexp.fabric.platform.FabricPlatformHelper;
 import com.infernalstudios.infernalexp.fabric.registration.FabricRegistrationFactory;
-import com.infernalstudios.infernalexp.module.ModEntityTypes;
 import com.infernalstudios.infernalexp.platform.Services;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.level.levelgen.Heightmap;
 
 public class InfernalExpansion implements ModInitializer {
 
