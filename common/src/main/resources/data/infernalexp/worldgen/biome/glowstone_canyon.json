@@ -32,7 +32,9 @@
   "features": [
     [],
     [],
-    [],
+    [
+      "infernalexp:gsc_blackstone_blobs"
+    ],
     [],
     [],
     [],
@@ -43,6 +45,9 @@
     ],
     [],
     [
+      "infernalexp:gsc_spring_open",
+      "infernalexp:gsc_spring_closed",
+      "minecraft:ore_magma",
       "infernalexp:dullthorns",
       "infernalexp:glowlight_fire",
       "infernalexp:luminous_fungus"
