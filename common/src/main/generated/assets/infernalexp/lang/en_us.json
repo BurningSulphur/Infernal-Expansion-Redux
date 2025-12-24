@@ -57,5 +57,6 @@
   "item.minecraft.lingering_potion.effect.warped": "Lingering Potion of Warped",
   "item.minecraft.potion.effect.warped": "Potion of Warped",
   "item.minecraft.splash_potion.effect.warped": "Splash Potion of Warped",
-  "itemgroup.infernalexp": "Infernal Expansion"
+  "itemgroup.infernalexp": "Infernal Expansion",
+  "biome.infernalexp.glowstone_canyon": "Glowstone Canyon"
 }
