@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Mixin(MultiNoiseBiomeSource.class)
 public class MultiNoiseBiomeSourceMixin {
@@ -48,10 +49,9 @@ public class MultiNoiseBiomeSourceMixin {
             List<Pair<Climate.ParameterPoint, Holder<Biome>>> newEntries = new ArrayList<>(parameters.values());
 
             for (Map.Entry<ResourceKey<Biome>, Climate.ParameterPoint> entry : ModBiomes.getBiomeRegistry().entrySet()) {
-                biomeRegistry.getHolder(entry.getKey()).ifPresent(biomeHolder -> {
-                    Pair<Climate.ParameterPoint, Holder<Biome>> newPair = new Pair<>(entry.getValue(), biomeHolder);
-                    newEntries.add(newPair);
-                });
+                Optional<Holder.Reference<Biome>> biomeHolderOpt = biomeRegistry.getHolder(entry.getKey());
+
+                biomeHolderOpt.ifPresent(biomeHolder -> newEntries.add(new Pair<>(entry.getValue(), biomeHolder)));
             }
 
             return new Climate.ParameterList<>(newEntries);
