@@ -3,6 +3,8 @@ package com.infernalstudios.infernalexp.mixin;
 import com.infernalstudios.infernalexp.block.ShroomlightTearBlock;
 import com.infernalstudios.infernalexp.module.ModBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.context.UseOnContext;
@@ -25,18 +27,31 @@ public class BoneMealItemMixin {
         BlockPos pos = context.getClickedPos();
 
         if (world.getBlockState(pos).is(Blocks.SHROOMLIGHT)) {
-            BlockPos targetPos = world.getBiome(pos).is(Biomes.WARPED_FOREST) ? pos.above() : pos.below();
+            boolean isWarped = world.getBiome(pos).is(Biomes.WARPED_FOREST);
+            BlockPos targetPos = isWarped ? pos.above() : pos.below();
 
             if (world.getBlockState(targetPos).isAir()) {
                 if (!world.isClientSide) {
                     context.getItemInHand().shrink(1);
-                    world.levelEvent(1505, pos, 0);
 
                     BlockState tear = ModBlocks.SHROOMLIGHT_TEAR.get().defaultBlockState();
-                    if (world.getBiome(pos).is(Biomes.WARPED_FOREST))
+                    if (isWarped)
                         world.setBlock(targetPos, tear.setValue(ShroomlightTearBlock.UP, true), Block.UPDATE_ALL);
                     else
                         world.setBlock(targetPos, tear, Block.UPDATE_ALL);
+
+                    if (world instanceof ServerLevel serverLevel) {
+
+                        double spawnX = targetPos.getX() + 0.5D;
+                        double spawnZ = targetPos.getZ() + 0.5D;
+                        double spawnY = targetPos.getY() + 0.1D;
+
+                        serverLevel.sendParticles(ParticleTypes.HAPPY_VILLAGER,
+                                spawnX, spawnY, spawnZ,
+                                15,
+                                0.25D, 0.25D, 0.25D,
+                                0.05D);
+                    }
                 }
                 cir.setReturnValue(InteractionResult.sidedSuccess(world.isClientSide));
             }
