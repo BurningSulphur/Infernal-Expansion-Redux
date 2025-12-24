@@ -27,6 +27,7 @@ subprojects {
         maven { url "https://maven.parchmentmc.org" }
         maven { url "https://maven.minecraftforge.net" }
         maven { url "https://cursemaven.com" }
+        maven { url "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
 
         flatDir { dirs "/libs" }
     }

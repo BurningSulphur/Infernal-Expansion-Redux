@@ -33,6 +33,7 @@
         "infernalexp.mixins.json"
     ],
     "depends": {
+        "geckolib": ">=4.4.7",
         "fabricloader": ">=0.15.10",
         "minecraft": "~1.20.1",
         "java": ">=17",

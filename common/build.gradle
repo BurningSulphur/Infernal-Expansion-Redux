@@ -13,11 +13,10 @@ loom {
 dependencies {
     // We depend on Fabric Loader here to use the Fabric @Environment annotations, which get remapped to the correct annotations on each platform.
     // Do NOT use other classes from Fabric Loader.
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
 
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
-    modCompileOnly "com.github.glitchfiend:TerraBlender-common:$rootProject.terrablender_version"
 
-    compileOnly "io.github.llamalad7:mixinextras-common:${mixinextras_version}"
-    annotationProcessor "io.github.llamalad7:mixinextras-common:${mixinextras_version}"
+    modCompileOnly "com.github.glitchfiend:TerraBlender-common:$terrablender_version"
+    modCompileOnly "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
 }
