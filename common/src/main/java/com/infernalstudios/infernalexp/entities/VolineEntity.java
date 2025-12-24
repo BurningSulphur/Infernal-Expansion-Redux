@@ -209,6 +209,16 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
 
         this.getNavigation().stop();
         Objects.requireNonNull(this.getAttribute(Attributes.MOVEMENT_SPEED)).setBaseValue(0.0D);
+
+        this.setPos(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
+        float snappedRot = Math.round(this.getYRot() / 90.0F) * 90.0F;
+        this.setYRot(snappedRot);
+        this.yBodyRot = snappedRot;
+        this.yHeadRot = snappedRot;
+        this.yRotO = snappedRot;
+        this.yBodyRotO = snappedRot;
+        this.yHeadRotO = snappedRot;
+
         this.setDeltaMovement(0, this.getDeltaMovement().y, 0);
     }
 
@@ -226,10 +236,12 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
         }
     }
 
+    public void playEatingAnimation() {
+        this.triggerAnim("actionController", "eat");
+    }
+
     public void ate(ItemStack stack) {
         if (stack.is(Items.MAGMA_CREAM)) {
-            this.triggerAnim("actionController", "eat");
-            this.playSound(SoundEvents.GENERIC_EAT, 1.0F, 1.0F);
 
             if (!this.isGrown()) {
                 int eaten = this.entityData.get(MAGMA_CREAM_EATEN) + 1;
@@ -400,14 +412,21 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
     public void aiStep() {
         super.aiStep();
         if (this.isSleeping()) {
-            // Lock rotation and movement while sleeping
+            // Lock movement while sleeping
             this.setDeltaMovement(0, this.getDeltaMovement().y, 0);
-            this.yBodyRot = this.yBodyRotO;
-            this.yHeadRot = this.yHeadRotO;
-            this.setYRot(this.yRotO);
+
+            float snappedRot = Math.round(this.getYRot() / 90.0F) * 90.0F;
+
+            this.setYRot(snappedRot);
+            this.yBodyRot = snappedRot;
+            this.yHeadRot = snappedRot;
+
+            this.yRotO = snappedRot;
+            this.yBodyRotO = snappedRot;
+            this.yHeadRotO = snappedRot;
+
             this.setXRot(this.xRotO);
 
-            // Handle timer
             int timer = this.entityData.get(SLEEP_TIMER);
             if (timer > 0) {
                 this.entityData.set(SLEEP_TIMER, timer - 1);

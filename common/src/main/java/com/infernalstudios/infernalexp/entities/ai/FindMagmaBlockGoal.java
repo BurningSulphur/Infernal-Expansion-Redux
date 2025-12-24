@@ -53,6 +53,6 @@ public class FindMagmaBlockGoal extends MoveToBlockGoal {
 
     @Override
     public double acceptedDistance() {
-        return 1.5D;
+        return 0.5D;
     }
 }
