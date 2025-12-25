@@ -6,18 +6,23 @@
   },
   "downfall": 0.5,
   "effects": {
+    "additions_sound": {
+      "sound": "infernalexp:ambient.glowstone_canyon.additions",
+      "tick_chance": 0.0111
+    },
+    "ambient_sound": "infernalexp:ambient.glowstone_canyon.loop",
     "fog_color": -2916568,
     "mood_sound": {
+      "sound": "infernalexp:ambient.glowstone_canyon.mood",
       "block_search_extent": 8,
-      "offset": 2,
-      "sound": "minecraft:ambient.cave",
+      "offset": 2.0,
       "tick_delay": 6000
     },
     "music": {
+      "sound": "infernalexp:music.nether.glowstone_canyon",
       "max_delay": 24000,
-      "min_delay": 6000,
-      "replace_current_music": true,
-      "sound": "minecraft:music.nether"
+      "min_delay": 12000,
+      "replace_current_music": false
     },
     "particle": {
       "options": {
