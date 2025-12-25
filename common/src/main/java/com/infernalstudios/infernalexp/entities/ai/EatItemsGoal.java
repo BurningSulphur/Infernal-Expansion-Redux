@@ -86,7 +86,7 @@ public class EatItemsGoal extends Goal {
         this.mob.getLookControl().setLookAt(this.targetItem, 30.0F, 30.0F);
         this.mob.getNavigation().moveTo(this.targetItem, 1.2D);
 
-        if (this.mob.distanceToSqr(this.targetItem) < 2.0D) {
+        if (this.mob.distanceToSqr(this.targetItem) < 1.5D) {
             this.mob.playEatingAnimation();
             this.faceItemInstantly();
 

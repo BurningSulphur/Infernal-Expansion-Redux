@@ -31,6 +31,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.MagmaCube;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.player.Player;
@@ -140,6 +141,14 @@ public class VolineEntity extends Animal implements Enemy, IBucketable, GeoEntit
     }
 
     @Override
+    protected float getSoundVolume() {
+        if (this.isSleeping()) {
+            return 2.0F;
+        }
+        return super.getSoundVolume();
+    }
+
+    @Override
     public void setFromBucket(boolean isFromBucket) {
         this.entityData.set(FROM_BUCKET, isFromBucket);
     }
@@ -211,6 +220,7 @@ public class VolineEntity extends Animal implements Enemy, IBucketable, GeoEntit
         this.goalSelector.addGoal(9, new PanicGoal(this, getAttributeValue(Attributes.MOVEMENT_SPEED) * 2.0D));
         this.targetSelector.addGoal(0, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, entity -> entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.isHolding(Items.MAGMA_CREAM)));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, MagmaCube.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Monster.class, true, entity -> entity.hasEffect(MobEffects.FIRE_RESISTANCE)));
     }
 
@@ -454,7 +464,7 @@ public class VolineEntity extends Animal implements Enemy, IBucketable, GeoEntit
     @Override
     protected SoundEvent getAmbientSound() {
         if (this.isSleeping()) {
-            return null;
+            return SoundEvents.FOX_SLEEP;
         }
         return ModSounds.VOLINE_AMBIENT.get();
     }

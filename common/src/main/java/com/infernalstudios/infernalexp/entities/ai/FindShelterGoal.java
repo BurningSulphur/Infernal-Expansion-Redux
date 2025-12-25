@@ -67,7 +67,15 @@ public class FindShelterGoal extends MoveToBlockGoal {
         super.tick();
 
         if (this.isReachedTarget()) {
-            this.voline.startSleeping(this.blockPos.above());
+            double targetX = this.blockPos.getX() + 0.5D;
+            double targetY = this.blockPos.getY() + 1.0D;
+            double targetZ = this.blockPos.getZ() + 0.5D;
+
+            if (this.voline.distanceToSqr(targetX, this.voline.getY(), targetZ) > 0.04D) {
+                this.voline.getNavigation().moveTo(targetX, targetY, targetZ, this.speedModifier);
+            } else {
+                this.voline.startSleeping(this.blockPos.above());
+            }
         }
     }
 
