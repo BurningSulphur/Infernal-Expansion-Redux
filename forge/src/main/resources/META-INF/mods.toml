@@ -1,13 +1,13 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
 license = "AGPL-3.0"
-issueTrackerURL = "https://github.com/infernalstudios/Infernal-Expansion/issues"
+issueTrackerURL = "https://github.com/infernalstudios/Infernal-Expansion-Redux/issues"
 
 [[mods]]
 modId = "infernalexp"
 version = "${version}"
 displayName = "Infernal Expansion"
-authors = "Lyof, Nekomaster, evanbones"
+authors = "evanbones, Lyof, Nekomaster"
 description = "Expanding the Nether beyond its official update with tons of new mobs & blocks, all while staying true to the Vanilla feel!"
 logoFile = "icon.png"
 

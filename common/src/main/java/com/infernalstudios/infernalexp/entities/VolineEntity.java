@@ -1,17 +1,21 @@
 package com.infernalstudios.infernalexp.entities;
 
 import com.infernalstudios.infernalexp.entities.ai.EatItemsGoal;
-import com.infernalstudios.infernalexp.entities.ai.FindMagmaBlockGoal;
+import com.infernalstudios.infernalexp.entities.ai.FindShelterGoal;
 import com.infernalstudios.infernalexp.module.ModBlocks;
+import com.infernalstudios.infernalexp.module.ModEntityTypes;
 import com.infernalstudios.infernalexp.module.ModItems;
 import com.infernalstudios.infernalexp.module.ModSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
@@ -25,6 +29,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.player.Player;
@@ -48,7 +54,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Objects;
 
-public class VolineEntity extends Monster implements IBucketable, GeoEntity {
+public class VolineEntity extends Animal implements Enemy, IBucketable, GeoEntity {
 
     // NBT Tags
     private static final String TAG_MAGMA_CREAM_EATEN = "MagmaCreamEaten";
@@ -61,7 +67,7 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
     // Gameplay Constants
     private static final int MAX_MAGMA_CREAM_EATEN = 3;
     private static final int SLEEP_DURATION_TICKS = 1000;
-    private static final int SHELTER_SEEK_TIMEOUT = 200; // 10 seconds
+    private static final int SHELTER_SEEK_TIMEOUT = 200;
     private static final double BASE_MOVEMENT_SPEED = 0.4D;
     private static final double GROWN_MOVEMENT_SPEED = 0.16D;
     private static final double SPEED_REDUCTION_PER_CREAM = 0.12D;
@@ -85,12 +91,12 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
     private static final RawAnimation FALLING_ASLEEP = RawAnimation.begin().thenPlay("falling_asleep");
     private static final RawAnimation ASLEEP = RawAnimation.begin().thenLoop("asleep");
 
-    public VolineEntity(EntityType<? extends Monster> type, Level level) {
+    public VolineEntity(EntityType<? extends Animal> type, Level level) {
         super(type, level);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Monster.createMonsterAttributes()
+        return Animal.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.ATTACK_DAMAGE, 1.0D)
                 .add(Attributes.MOVEMENT_SPEED, BASE_MOVEMENT_SPEED);
@@ -129,6 +135,11 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
     }
 
     @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return !this.isPersistenceRequired();
+    }
+
+    @Override
     public void setFromBucket(boolean isFromBucket) {
         this.entityData.set(FROM_BUCKET, isFromBucket);
     }
@@ -160,9 +171,10 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
 
     @Override
     protected void registerGoals() {
-        super.registerGoals();
-        this.goalSelector.addGoal(0, new FindMagmaBlockGoal(this, 1.0D, 16));
+        this.goalSelector.addGoal(0, new FindShelterGoal(this, 1.0D, 16));
         this.goalSelector.addGoal(1, new EatItemsGoal(this));
+
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, Ingredient.of(Items.MAGMA_CREAM), false) {
             @Override
@@ -172,31 +184,31 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
         });
 
         this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Player.class, 6.0F, 1.2D, 1.5D, entity -> entity.isHolding(Items.SNOWBALL)));
-        this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Piglin.class, 8.0F, 1.0D, 1.2D, entity -> !entity.hasEffect(MobEffects.FIRE_RESISTANCE)));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, true));
+        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Piglin.class, 8.0F, 1.0D, 1.2D, entity -> !entity.hasEffect(MobEffects.FIRE_RESISTANCE)));
+        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.2D, true));
 
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D) {
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.0D) {
             @Override
             public boolean canUse() {
                 return !VolineEntity.this.isSleeping() && super.canUse();
             }
         });
 
-        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F) {
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F) {
             @Override
             public boolean canUse() {
                 return !VolineEntity.this.isSleeping() && super.canUse();
             }
         });
 
-        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this) {
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this) {
             @Override
             public boolean canUse() {
                 return !VolineEntity.this.isSleeping() && super.canUse();
             }
         });
 
-        this.goalSelector.addGoal(8, new PanicGoal(this, getAttributeValue(Attributes.MOVEMENT_SPEED) * 2.0D));
+        this.goalSelector.addGoal(9, new PanicGoal(this, getAttributeValue(Attributes.MOVEMENT_SPEED) * 2.0D));
         this.targetSelector.addGoal(0, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, entity -> entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.isHolding(Items.MAGMA_CREAM)));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Monster.class, true, entity -> entity.hasEffect(MobEffects.FIRE_RESISTANCE)));
@@ -285,8 +297,25 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
         this.setPos(this.getX(), this.getY(), this.getZ());
     }
 
+    @Nullable
+    @Override
+    public AgeableMob getBreedOffspring(@NotNull ServerLevel level, @NotNull AgeableMob parent) {
+        VolineEntity baby = ModEntityTypes.VOLINE.get().create(level);
+        if (baby != null) {
+            baby.setGrown(false);
+            baby.setMagmaCreamEaten(0);
+        }
+        return baby;
+    }
+
+    @Override
+    public boolean isFood(@NotNull ItemStack stack) {
+        return this.isGrown() && stack.is(ItemTags.PIGLIN_LOVED);
+    }
+
     public boolean wantsToEat(ItemStack stack) {
-        return !this.isSleeping() && (stack.is(Items.MAGMA_CREAM));
+        if (this.isSleeping()) return false;
+        return stack.is(Items.MAGMA_CREAM) || stack.is(ItemTags.PIGLIN_LOVED);
     }
 
     private void lockToGrid() {
@@ -329,21 +358,27 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
     }
 
     public void ate(ItemStack stack) {
-        if (!stack.is(Items.MAGMA_CREAM)) return;
+        if (stack.is(Items.MAGMA_CREAM)) {
+            int eaten = this.getMagmaCreamEaten() + 1;
+            this.setMagmaCreamEaten(eaten);
 
-        int eaten = this.getMagmaCreamEaten() + 1;
-        this.setMagmaCreamEaten(eaten);
-
-        if (eaten >= MAX_MAGMA_CREAM_EATEN) {
-            if (!this.isGrown()) {
-                // Growth Logic
-                this.setGrown(true);
-                this.setMagmaCreamEaten(0);
-                this.playSound(SoundEvents.ZOMBIE_VILLAGER_CONVERTED, 1.0F, 1.0F);
+            if (eaten >= MAX_MAGMA_CREAM_EATEN) {
+                if (!this.isGrown()) {
+                    this.setGrown(true);
+                    this.setMagmaCreamEaten(0);
+                    this.playSound(SoundEvents.ZOMBIE_VILLAGER_CONVERTED, 1.0F, 1.0F);
+                } else {
+                    this.setSeekingShelter(true);
+                    this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0));
+                }
+            }
+        }
+        else if (stack.is(ItemTags.PIGLIN_LOVED)) {
+            if (this.isGrown()) {
+                this.setInLove(null);
+                this.playSound(SoundEvents.GENERIC_EAT, 1.0F, 1.0F);
             } else {
-                // Already grown, now seeks shelter
-                this.setSeekingShelter(true);
-                this.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0));
+                this.playSound(SoundEvents.GENERIC_EAT, 0.5F, 1.2F);
             }
         }
 
@@ -354,11 +389,19 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
     }
 
     @Override
+    public float getVoicePitch() {
+        if (!this.isGrown()) {
+            return (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.5F;
+        }
+        return super.getVoicePitch();
+    }
+
+    @Override
     public void aiStep() {
         super.aiStep();
         if (this.isSleeping()) {
             this.lockToGrid();
-            this.setXRot(this.xRotO); // Lock head pitch
+            this.setXRot(this.xRotO);
 
             int timer = this.getSleepTimer();
             if (timer > 0) {
@@ -400,7 +443,7 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
     }
 
     @Override
-    protected @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
+    public @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
         if (!this.isGrown()) {
             return IBucketable.tryBucketEntity(player, hand, this).orElse(super.mobInteract(player, hand));
         }
@@ -452,6 +495,13 @@ public class VolineEntity extends Monster implements IBucketable, GeoEntity {
     private void transformToGeyser() {
         if (!this.level().isClientSide) {
             BlockPos pos = this.blockPosition();
+            ServerLevel serverLevel = (ServerLevel) this.level();
+
+            serverLevel.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, this.getSoundSource(), 1.0F, 1.0F);
+            serverLevel.sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY() + 0.5, this.getZ(), 15, 0.5, 0.5, 0.5, 0.1);
+
+            serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY() + 0.5, this.getZ(), 5, 0.3, 0.5, 0.3, 0.05);
+
             if (this.level().getBlockState(pos).isAir()) {
                 this.level().setBlock(pos, ModBlocks.VOLATILE_GEYSER.get().defaultBlockState(), 3);
             }

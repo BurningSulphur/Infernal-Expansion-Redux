@@ -9,8 +9,8 @@
     ],
     "contact": {
         "homepage": "https://infernalstudios.org/",
-        "sources": "https://github.com/infernalstudios/Infernal-Expansion/",
-        "issues": "https://github.com/infernalstudios/Infernal-Expansion/issues"
+        "sources": "https://github.com/infernalstudios/Infernal-Expansion-Redux/",
+        "issues": "https://github.com/infernalstudios/Infernal-Expansion-Redux/issues"
     },
     "license": "AGPL-3.0",
     "icon": "icon.png",
