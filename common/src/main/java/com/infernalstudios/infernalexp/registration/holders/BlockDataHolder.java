@@ -374,6 +374,12 @@ public class BlockDataHolder<T extends Block> {
         return this.BLOCKSETS.get(Model.FENCE_GATE);
     }
 
+    public BlockDataHolder<? extends Block> withCustomItem(java.util.function.Function<T, BlockItem> itemFactory) {
+        this.blockItem = ItemDataHolder.of(() -> itemFactory.apply(this.get()))
+                .withModel(ModelTemplates.FLAT_ITEM);
+        return this;
+    }
+
     public enum Model {
         CUBE("", ""),
         PILLAR("", ""),

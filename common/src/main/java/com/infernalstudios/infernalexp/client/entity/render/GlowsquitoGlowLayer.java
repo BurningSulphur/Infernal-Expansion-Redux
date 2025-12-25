@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
+// TODO: should be AutoGlowingGeoLayer after converting to geckolib entity
 public class GlowsquitoGlowLayer extends RenderLayer<GlowsquitoEntity, GlowsquitoModel<GlowsquitoEntity>> {
     private static final ResourceLocation GLOW_TEXTURE = new ResourceLocation(IEConstants.MOD_ID,
             "textures/entity/glowsquito_glow.png");

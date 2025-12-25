@@ -8,13 +8,14 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
 
 public class VolineRenderer extends GeoEntityRenderer<VolineEntity> {
 
     public VolineRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new VolineModel());
 
-        this.addRenderLayer(new VolineGlowLayer(this));
+        this.addRenderLayer(new AutoGlowingGeoLayer<>(this));
 
         this.shadowRadius = 0.7F;
     }

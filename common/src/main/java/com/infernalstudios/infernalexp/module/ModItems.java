@@ -93,7 +93,6 @@ public class ModItems {
             .withTranslation("Glowsquito Spawn Egg")
     );
 
-
     public static final ItemDataHolder<?> GLOWSILK_STRING = register("glowsilk_string", ItemDataHolder.of(() ->
                     new Item(new Item.Properties()))
             .withModel(ModelTemplates.FLAT_ITEM)

@@ -1,5 +1,15 @@
 package com.infernalstudios.infernalexp.platform.services;
 
+import com.infernalstudios.infernalexp.items.InfernalGeoBlockItem;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+
 public interface IPlatformHelper {
 
     /**
@@ -32,5 +42,20 @@ public interface IPlatformHelper {
     default String getEnvironmentName() {
 
         return isDevelopmentEnvironment() ? "development" : "production";
+    }
+
+    /**
+     * Creates a platform-specific instance of a GeckoLib block entity's item.
+     */
+    InfernalGeoBlockItem createGeoBlockItem(Block block, Item.Properties properties, ResourceLocation model, ResourceLocation texture);
+
+    /**
+     * Creates a BlockEntityType using platform-specific builders.
+     */
+    <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(BlockEntityFactory<T> factory, Block... blocks);
+
+    @FunctionalInterface
+    interface BlockEntityFactory<T extends BlockEntity> {
+        @NotNull T create(BlockPos pos, BlockState state);
     }
 }
