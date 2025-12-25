@@ -2,6 +2,7 @@ package com.infernalstudios.infernalexp.world.surface;
 
 import com.infernalstudios.infernalexp.module.ModBiomes;
 import com.infernalstudios.infernalexp.module.ModBlocks;
+import com.infernalstudios.infernalexp.module.ModSurfaceRuleConditions;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
@@ -21,7 +22,7 @@ public class ModSurfaceRules {
                     SurfaceRules.ifTrue(SurfaceRules.ON_CEILING, GLIMMER_GRAVEL),
                     SHIMMER_SAND)),
             SurfaceRules.ifTrue(SurfaceRules.stoneDepthCheck(3, false, CaveSurface.FLOOR), SHIMMER_STONE),
-            //TODO SurfaceRules.ifTrue(IESurfaceRules.chance("dimstone", 0.02F), DIMSTONE),
+            SurfaceRules.ifTrue(ModSurfaceRuleConditions.chance("dimstone", 0.02F), DIMSTONE),
             DULLSTONE
     ));
 

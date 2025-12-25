@@ -21,6 +21,7 @@ public class IECommon {
         ModBiomes.load();
         ModFeatures.load();
         ModCarvers.load();
+        ModSurfaceRuleConditions.load();
         ModParticleTypes.load();
         ModSounds.load();
     }
