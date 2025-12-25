@@ -18,15 +18,12 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ModBlocks {
-    /** Map of all Block Resource Locations to their BlockDataHolders. */
     private static final Map<ResourceLocation, BlockDataHolder<?>> BLOCK_REGISTRY = new HashMap<>();
 
     public static BlockDataHolder<?> register(String name, BlockDataHolder<?> blockDataHolder) {
@@ -39,15 +36,12 @@ public class ModBlocks {
         return BLOCK_REGISTRY;
     }
 
-    // Called in the mod initializer / constructor in order to make sure that items are registered
     public static void load() {}
 
-
     public static final BlockDataHolder<?> SHIMMER_SAND = register("shimmer_sand", BlockDataHolder.of(() ->
-                    new SandBlock(0xffffaa, BlockBehaviour.Properties.copy(Blocks.SAND)))
+                    new SandBlock(0xffffaa, ModBlockProperties.SHIMMER_SAND))
             .withModel(BlockDataHolder.Model.ROTATABLE).withItem().dropsSelf()
-            .withTags(BlockTags.MINEABLE_WITH_SHOVEL, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS, BlockTags.INFINIBURN_NETHER,
-                    ModTags.Blocks.GLOWSTONE_CANYON_CARVER_REPLACEABLES)
+            .withTags(BlockTags.MINEABLE_WITH_SHOVEL, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS, BlockTags.INFINIBURN_NETHER, ModTags.Blocks.GLOWSTONE_CANYON_CARVER_REPLACEABLES)
             .withTranslation("Shimmer Sand")
     );
 
@@ -58,87 +52,62 @@ public class ModBlocks {
     );
 
     public static final BlockDataHolder<?> GLIMMER_GRAVEL = register("glimmer_gravel", BlockDataHolder.of(() ->
-                    new GlimmerGravelBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)))
+                    new GlimmerGravelBlock(ModBlockProperties.GLIMMER_GRAVEL))
             .withModel(BlockDataHolder.Model.ROTATABLE).withItem().dropsSelf()
             .withTags(BlockTags.MINEABLE_WITH_SHOVEL, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS)
             .withTranslation("Glimmer Gravel")
     );
 
     public static final BlockDataHolder<?> GLOWLIGHT_GLASS = register("glowlight_glass", BlockDataHolder.of(() ->
-                    new GlassBlock(BlockBehaviour.Properties.copy(Blocks.GLOWSTONE).noOcclusion()))
+                    new GlassBlock(ModBlockProperties.GLOWLIGHT_GLASS))
             .glass().cutout().withItem()
             .withTranslation("Glowlight Glass")
     );
 
-    public static final BlockBehaviour.Properties shimmerstone = BlockBehaviour.Properties.copy(Blocks.STONE)
-            .mapColor(MapColor.COLOR_YELLOW);
-
     public static final BlockDataHolder<?> SHIMMER_STONE = register("shimmer_stone", BlockDataHolder.of(() ->
-                    new Block(shimmerstone))
+                    new Block(ModBlockProperties.SHIMMERSTONE))
             .withModel(BlockDataHolder.Model.CUBE).withItem().dropsSelf()
-            .withTags(BlockTags.MINEABLE_WITH_PICKAXE, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS,
-                    ModTags.Blocks.GLOWSTONE_CANYON_CARVER_REPLACEABLES)
+            .withTags(BlockTags.MINEABLE_WITH_PICKAXE, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS, ModTags.Blocks.GLOWSTONE_CANYON_CARVER_REPLACEABLES)
             .withTranslation("Shimmer Stone")
     );
 
     public static final BlockDataHolder<?> SHIMMER_STONE_BRICKS = register("shimmer_stone_bricks", BlockDataHolder.of(() ->
-                    new Block(shimmerstone))
+                    new Block(ModBlockProperties.SHIMMERSTONE))
             .withStairs().withSlab()
             .withModel(BlockDataHolder.Model.CUBE).withItem().dropsSelf()
             .withTags(BlockTags.MINEABLE_WITH_PICKAXE, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS)
             .withTranslation("Shimmer Stone Bricks")
     );
 
-
     public static final BlockDataHolder<?> POLISHED_GLOWSTONE = register("polished_glowstone", BlockDataHolder.of(() ->
-                    new Block(BlockBehaviour.Properties.copy(Blocks.GLOWSTONE)))
+                    new Block(ModBlockProperties.GLOWSTONE))
             .withModel(BlockDataHolder.Model.CUBE).withItem().dropsSelf()
             .withTags(BlockTags.MINEABLE_WITH_PICKAXE, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS)
             .withTranslation("Polished Glowstone")
     );
 
-    private static final BlockBehaviour.Properties dimstone =
-            BlockBehaviour.Properties.copy(Blocks.GLOWSTONE).strength(1).lightLevel(a -> 6)
-                    .mapColor(MapColor.TERRACOTTA_BROWN).requiresCorrectToolForDrops();
-
     public static final BlockDataHolder<?> DIMSTONE = register("dimstone", BlockDataHolder.of(() ->
-                    new Block(dimstone))
-            .withItem().withTags(BlockTags.MINEABLE_WITH_PICKAXE, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS,
-                    ModTags.Blocks.GLOWSTONE_CANYON_CARVER_REPLACEABLES)
+                    new Block(ModBlockProperties.DIMSTONE))
+            .withItem().withTags(BlockTags.MINEABLE_WITH_PICKAXE, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS, ModTags.Blocks.GLOWSTONE_CANYON_CARVER_REPLACEABLES)
             .withTranslation("Dimstone")
     );
 
     public static final BlockDataHolder<?> POLISHED_DIMSTONE = register("polished_dimstone", BlockDataHolder.of(() ->
-                    new Block(dimstone))
+                    new Block(ModBlockProperties.DIMSTONE))
             .withModel(BlockDataHolder.Model.CUBE).withItem().dropsSelf()
             .withTags(BlockTags.MINEABLE_WITH_PICKAXE, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS)
             .withTranslation("Polished Dimstone")
     );
 
-    private static final BlockBehaviour.Properties dullstone =
-            BlockBehaviour.Properties.copy(Blocks.GLOWSTONE).strength(1.7f).lightLevel(a -> 0)
-                    .mapColor(MapColor.TERRACOTTA_GRAY).requiresCorrectToolForDrops().sound(SoundType.STONE);
-
-    private static final BlockBehaviour.Properties dullstoneButton =
-            BlockBehaviour.Properties.copy(Blocks.GLOWSTONE).strength(1.7f).noCollission()
-                    .lightLevel(a -> a.getValue(ButtonBlock.POWERED) ? 15 : 0)
-                    .mapColor(MapColor.TERRACOTTA_GRAY).requiresCorrectToolForDrops().sound(SoundType.STONE);
-
-    private static final BlockBehaviour.Properties dullstonePlate =
-            BlockBehaviour.Properties.copy(Blocks.GLOWSTONE).strength(1.7f).noCollission()
-                    .lightLevel(a -> a.getValue(PressurePlateBlock.POWERED) ? 15 : 0)
-                    .mapColor(MapColor.TERRACOTTA_GRAY).requiresCorrectToolForDrops().sound(SoundType.STONE);
-
     public static final BlockDataHolder<?> DULLSTONE = register("dullstone", BlockDataHolder.of(() ->
-                    new Block(dullstone))
+                    new Block(ModBlockProperties.DULLSTONE))
             .withModel(BlockDataHolder.Model.CUBE).withItem()
-            .withTags(BlockTags.MINEABLE_WITH_PICKAXE, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS,
-                    ModTags.Blocks.GLOWSTONE_CANYON_CARVER_REPLACEABLES)
+            .withTags(BlockTags.MINEABLE_WITH_PICKAXE, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS, ModTags.Blocks.GLOWSTONE_CANYON_CARVER_REPLACEABLES)
             .withTranslation("Dullstone")
     );
 
     public static final BlockDataHolder<?> POLISHED_DULLSTONE = register("polished_dullstone", BlockDataHolder.of(() ->
-                    new Block(dullstone))
+                    new Block(ModBlockProperties.DULLSTONE))
             .withModel(BlockDataHolder.Model.CUBE).withItem().dropsSelf()
             .withTags(BlockTags.MINEABLE_WITH_PICKAXE, ModTags.Blocks.GLOW_FIRE_BASE_BLOCKS)
             .withTranslation("Polished Dullstone")
@@ -147,30 +116,25 @@ public class ModBlocks {
     public static final BlockSetType dullstoneSet = new BlockSetType("dullstone");
 
     public static final BlockDataHolder<?> DULLSTONE_BUTTON = register("dullstone_button", BlockDataHolder.of(() ->
-                    ButtonBlockAccessor.createButtonBlock(dullstoneButton,
+                    ButtonBlockAccessor.createButtonBlock(ModBlockProperties.DULLSTONE_BUTTON,
                             dullstoneSet, 20, false))
             .withItem().dropsSelf().withTags(BlockTags.MINEABLE_WITH_PICKAXE)
             .withTranslation("Dullstone Button")
     );
 
     public static final BlockDataHolder<?> DULLSTONE_PRESSURE_PLATE = register("dullstone_pressure_plate", BlockDataHolder.of(() ->
-                    PressurePlateBlockAccessor.createPressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, dullstonePlate,
+                    PressurePlateBlockAccessor.createPressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, ModBlockProperties.DULLSTONE_PLATE,
                             dullstoneSet))
             .withItem().dropsSelf().withTags(BlockTags.MINEABLE_WITH_PICKAXE)
             .withTranslation("Dullstone Pressure Plate")
     );
 
-
-    private static final BlockBehaviour.Properties cocoon = BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK)
-            .strength(2f).lightLevel(a -> 15).mapColor(DyeColor.WHITE).requiresCorrectToolForDrops();
-
     public static final BlockDataHolder<?> GLOWSILK_COCOON = register("glowsilk_cocoon", BlockDataHolder.of(() ->
-                    new RotatedPillarBlock(cocoon))
+                    new RotatedPillarBlock(ModBlockProperties.GLOWSILK_COCOON))
             .withModel(BlockDataHolder.Model.PILLAR).withItem().dropsSelf()
             .withTags(BlockTags.MINEABLE_WITH_HOE, BlockTags.NEEDS_IRON_TOOL)
             .withTranslation("Glowsilk Cocoon")
     );
-
 
     public static final BlockDataHolder<?> LUMINOUS_FUNGUS = register("luminous_fungus", BlockDataHolder.of(() ->
                     new LuminousFungusBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_FUNGUS).mapColor(DyeColor.YELLOW)
@@ -198,23 +162,15 @@ public class ModBlocks {
             .withTranslation("Warped Fungus Cap")
     );
 
-    private static final BlockBehaviour.Properties dullthorns =
-            BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(1.1f)
-                    .mapColor(MapColor.TERRACOTTA_BROWN).noCollission().noOcclusion().sound(SoundType.AZALEA_LEAVES);
-
-    private static final BlockBehaviour.Properties dullthornsBlock =
-            BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(0.8f)
-                    .mapColor(MapColor.TERRACOTTA_BROWN);
-
     public static final BlockDataHolder<?> DULLTHORNS = register("dullthorns", BlockDataHolder.of(() ->
-                    new DullthornsBlock(dullthorns))
+                    new DullthornsBlock(ModBlockProperties.DULLTHORNS))
             .cutout().withItem().dropsSelf()
             .withTags(BlockTags.CLIMBABLE, BlockTags.MINEABLE_WITH_AXE)
             .withTranslation("Dullthorns")
     );
 
     public static final BlockDataHolder<?> DULLTHORNS_BLOCK = register("dullthorns_block", BlockDataHolder.of(() ->
-                    new Block(dullthornsBlock) {
+                    new Block(ModBlockProperties.DULLTHORNS_BLOCK) {
                         @Override
                         public void stepOn(@NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Entity entity) {
                             super.stepOn(world, pos, state, entity);
@@ -226,7 +182,6 @@ public class ModBlocks {
             .withTags(BlockTags.MINEABLE_WITH_AXE)
             .withTranslation("Dullthorns Block")
     );
-
 
     public static final BlockDataHolder<?> GLOWLIGHT_FIRE = register("glowlight_fire", BlockDataHolder.of(() ->
                     new GlowlightFireBlock(BlockBehaviour.Properties.copy(Blocks.FIRE), 1))
@@ -261,7 +216,6 @@ public class ModBlocks {
             .withTranslation("Glowlight Lantern")
     );
 
-
     public static final BlockDataHolder<?> BASALT_IRON_ORE = register("basalt_iron_ore", BlockDataHolder.of(() ->
                     new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.BASALT).strength(1.6f, 4.4f)))
             .withItem().withModel(BlockDataHolder.Model.PILLAR)
@@ -269,14 +223,12 @@ public class ModBlocks {
             .withTranslation("Basalt Iron Ore")
     );
 
-
     public static final BlockDataHolder<?> SHROOMLIGHT_TEAR = register("shroomlight_tear", BlockDataHolder.of(() ->
                     new ShroomlightTearBlock(BlockBehaviour.Properties.copy(Blocks.SHROOMLIGHT).instabreak().noCollission(),
                             ModTags.Blocks.SHROOMLIGHT_TEARS_GROWABLE))
             .withItem().cutout().dropsSelf()
             .withTranslation("Shroomlight Tear")
     );
-
 
     public static final BlockDataHolder<?> PLANTED_QUARTZ = register("planted_quartz", BlockDataHolder.of(() ->
                     new SupportedBlock(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK).instabreak().noCollission(), () -> Items.QUARTZ))
@@ -290,13 +242,11 @@ public class ModBlocks {
             .withTranslation("Buried Bone")
     );
 
-
     public static final BlockDataHolder<?> QUARTZ_GLASS = register("quartz_glass", BlockDataHolder.of(() ->
                     new GlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).explosionResistance(6).noOcclusion()))
             .glass().cutout().withItem()
             .withTranslation("Quartz Glass")
     );
-
 
     public static final BlockDataHolder<?> BASALT_STAIRS = register("basalt_stairs", BlockDataHolder.of(() ->
             StairBlockAccessor.createStairBlock(Blocks.BASALT.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.BASALT))))
@@ -313,19 +263,15 @@ public class ModBlocks {
             .withItem().dropsSelf().withModel(BlockDataHolder.Model.WALL).withTags(BlockTags.WALLS)
             .withTranslation("Basalt Wall");
 
-    private static final BlockBehaviour.Properties basaltSandProperties = BlockBehaviour.Properties.of()
-            .mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM)
-            .strength(0.95F, 4.2F).sound(SoundType.SAND);
-
     public static final BlockDataHolder<?> BASALT_SAND = register("basalt_sand", BlockDataHolder.of(() ->
-                    new SandBlock(0x222222, basaltSandProperties))
+                    new SandBlock(0x222222, ModBlockProperties.BASALT_SAND))
             .withModel(BlockDataHolder.Model.ROTATABLE).withItem().dropsSelf()
             .withTags(BlockTags.MINEABLE_WITH_SHOVEL, BlockTags.SMELTS_TO_GLASS)
             .withTranslation("Basalt Sand")
     );
 
     public static final BlockDataHolder<?> BASALT_SAND_SHEET = register("basalt_sand_sheet", BlockDataHolder.of(() ->
-                    new LayerBlock(basaltSandProperties))
+                    new LayerBlock(ModBlockProperties.BASALT_SAND))
             .withItem().withTags(BlockTags.MINEABLE_WITH_SHOVEL)
             .withTranslation("Basalt Sand Sheet")
     );

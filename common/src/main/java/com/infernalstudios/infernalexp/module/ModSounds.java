@@ -5,6 +5,8 @@ import com.infernalstudios.infernalexp.registration.util.RegistrationProvider;
 import com.infernalstudios.infernalexp.registration.util.RegistryObject;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.block.SoundType;
 
 public class ModSounds {
     public static final RegistrationProvider<SoundEvent> SOUNDS = RegistrationProvider.get(BuiltInRegistries.SOUND_EVENT, com.infernalstudios.infernalexp.IEConstants.MOD_ID);
