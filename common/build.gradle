@@ -19,4 +19,5 @@ dependencies {
 
     modCompileOnly "com.github.glitchfiend:TerraBlender-common:$terrablender_version"
     modCompileOnly "software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}"
+    modApi "me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}"
 }

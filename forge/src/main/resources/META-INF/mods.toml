@@ -31,3 +31,10 @@ mandatory = true
 versionRange = "[4.4.7,5)"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.infernalexp]]
+modId="cloth_config"
+mandatory=false
+versionRange="[11.1.136,)"
+ordering="NONE"
+side="BOTH"

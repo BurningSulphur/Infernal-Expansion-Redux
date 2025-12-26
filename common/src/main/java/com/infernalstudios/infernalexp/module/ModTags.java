@@ -3,6 +3,8 @@ package com.infernalstudios.infernalexp.module;
 import com.infernalstudios.infernalexp.IECommon;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
@@ -23,5 +25,22 @@ public class ModTags {
         }
 
         public static final TagKey<Biome> IS_GLOWSTONE_CANYON = create("is_glowstone_canyon");
+    }
+
+    public static class Items {
+        public static TagKey<Item> create(String name) {
+            return TagKey.create(Registries.ITEM, IECommon.makeID(name));
+        }
+
+        public static final TagKey<Item> VOLINE_FOOD = create("voline_food");
+    }
+
+    public static class EntityTypes {
+        public static TagKey<EntityType<?>> create(String name) {
+            return TagKey.create(Registries.ENTITY_TYPE, IECommon.makeID(name));
+        }
+
+        public static final TagKey<EntityType<?>> VOLINE_FEAR = create("voline_fear");
+        public static final TagKey<EntityType<?>> VOLINE_HOSTILE = create("voline_hostile");
     }
 }

@@ -58,5 +58,14 @@
   "item.minecraft.potion.effect.warped": "Potion of Warped",
   "item.minecraft.splash_potion.effect.warped": "Splash Potion of Warped",
   "itemgroup.infernalexp": "Infernal Expansion",
-  "biome.infernalexp.glowstone_canyon": "Glowstone Canyon"
+  "biome.infernalexp.glowstone_canyon": "Glowstone Canyon",
+
+  "text.autoconfig.infernalexp.title": "Infernal Expansion Config",
+  "text.autoconfig.infernalexp.category.client": "Client Settings",
+  "text.autoconfig.infernalexp.category.common": "Common Settings",
+
+  "text.autoconfig.infernalexp.option.common.geyserSteamHeight": "Geyser Steam Height (Blocks)",
+  "text.autoconfig.infernalexp.option.common.volineTurnIntoGeyser": "Volines Turn Into Geysers",
+  "text.autoconfig.infernalexp.option.common.volineSleepWhenFed": "Volines Sleep When Fed",
+  "text.autoconfig.infernalexp.option.common.volineGetBig": "Volines Get Big"
 }

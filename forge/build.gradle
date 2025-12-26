@@ -44,6 +44,9 @@ dependencies {
     compileOnly("io.github.llamalad7:mixinextras-common:${mixinextras_version}")
     annotationProcessor("io.github.llamalad7:mixinextras-common:${mixinextras_version}")
 
+    modCompileOnly "me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}"
+    modRuntimeOnly "me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}"
+
     implementation("com.eliotlash.mclib:mclib:20")
     forgeRuntimeLibrary("com.eliotlash.mclib:mclib:20")
     modApi("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")

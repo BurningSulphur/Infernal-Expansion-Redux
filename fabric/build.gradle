@@ -20,6 +20,13 @@ loom {
     }
 }
 
+repositories {
+    maven {
+        name = "Terraformers"
+        url = "https://maven.terraformersmc.com/"
+    }
+}
+
 sourceSets.main.resources.srcDirs += project(":common").file("src/main/generated")
 
 architectury {
@@ -47,6 +54,11 @@ dependencies {
     modApi("net.fabricmc.fabric-api:fabric-api:$fabric_api_version")
 
     modLocalRuntime("curse.maven:jei-238222:7253589")
+
+    modCompileOnly "me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}"
+    modRuntimeOnly "me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}"
+
+    modImplementation "com.terraformersmc:modmenu:${mod_menu_version}"
 
     modApi("com.github.glitchfiend:TerraBlender-fabric:$terrablender_version")
     modApi("software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}")

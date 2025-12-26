@@ -4,7 +4,7 @@ import com.infernalstudios.infernalexp.IECommon;
 import com.infernalstudios.infernalexp.fabric.module.*;
 import net.fabricmc.api.ModInitializer;
 
-public class InfernalExpansion implements ModInitializer {
+public class InfernalExpansionFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
