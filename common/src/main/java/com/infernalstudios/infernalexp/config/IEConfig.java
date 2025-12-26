@@ -1,5 +1,7 @@
 package com.infernalstudios.infernalexp.config;
 
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
+
 public class IEConfig {
     public Client client = new Client();
     public Common common = new Common();
@@ -8,10 +10,29 @@ public class IEConfig {
     }
 
     public static class Common {
-        public int geyserSteamHeight = 8;
+        @ConfigEntry.Gui.CollapsibleObject
+        public Geyser geyser = new Geyser();
 
-        public boolean volineTurnIntoGeyser = true;
-        public boolean volineSleepWhenFed = true;
-        public boolean volineGetBig = true;
+        @ConfigEntry.Gui.CollapsibleObject
+        public Voline voline = new Voline();
+
+        public static class Geyser {
+            @ConfigEntry.Gui.Tooltip
+            public int geyserSteamHeight = 8;
+        }
+
+        public static class Voline {
+            @ConfigEntry.Gui.Tooltip
+            public boolean volineTurnIntoGeyser = true;
+
+            @ConfigEntry.Gui.Tooltip
+            public boolean volineSleepWhenFed = true;
+
+            @ConfigEntry.Gui.Tooltip
+            public boolean volineGetBig = true;
+
+            @ConfigEntry.Gui.Tooltip
+            public int volineMagmaCreamAmount = 3;
+        }
     }
 }

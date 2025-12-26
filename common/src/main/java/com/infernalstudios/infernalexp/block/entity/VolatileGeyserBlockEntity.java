@@ -33,7 +33,7 @@ public class VolatileGeyserBlockEntity extends BlockEntity implements GeoBlockEn
     public static void tick(Level level, BlockPos pos, BlockState state, VolatileGeyserBlockEntity entity) {
         boolean isPowered = state.getValue(VolatileGeyserBlock.POWERED);
         Direction facing = state.getValue(VolatileGeyserBlock.FACING);
-        double range = IECommon.getConfig().common.geyserSteamHeight;
+        double range = IECommon.getConfig().common.geyser.geyserSteamHeight;
 
         if (isPowered) {
             if (level.isClientSide) {
@@ -205,7 +205,7 @@ public class VolatileGeyserBlockEntity extends BlockEntity implements GeoBlockEn
         if (id == 1) {
             BlockState state = this.getBlockState();
             Direction facing = state.getValue(VolatileGeyserBlock.FACING);
-            double range = IECommon.getConfig().common.geyserSteamHeight;
+            double range = IECommon.getConfig().common.geyser.geyserSteamHeight;
 
             if (this.level != null && !this.level.isClientSide) {
                 this.applyBurstPhysics(this.level, this.worldPosition, facing, range);
