@@ -1,6 +1,7 @@
 package com.infernalstudios.infernalexp.fabric.datagen;
 
 import com.infernalstudios.infernalexp.IECommon;
+import com.infernalstudios.infernalexp.config.IEConfig;
 import com.infernalstudios.infernalexp.module.*;
 import com.infernalstudios.infernalexp.registration.holders.BlockDataHolder;
 import com.infernalstudios.infernalexp.registration.holders.EntityTypeDataHolder;
@@ -9,6 +10,7 @@ import com.infernalstudios.infernalexp.registration.holders.MobEffectDataHolder;
 import com.infernalstudios.infernalexp.world.carver.ModConfiguredCarvers;
 import com.infernalstudios.infernalexp.world.feature.ModConfiguredFeatures;
 import com.infernalstudios.infernalexp.world.feature.ModPlacedFeatures;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -34,12 +36,18 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
+import org.apache.commons.lang3.StringUtils;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
+
+import static com.infernalstudios.infernalexp.IEConstants.MOD_ID;
 
 public class IEDataGenerator implements DataGeneratorEntrypoint {
     @Override
@@ -214,6 +222,27 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
         public void generateTranslations(TranslationBuilder builder) {
             // Put manually added entries here
             builder.add(ModCreativeTabs.INFERNAL_EXPANSION_TAB.getResourceKey(), "Infernal Expansion");
+            generateConfigTranslations(builder);
+
+            // Geyser Tooltips
+            builder.add("text.autoconfig.infernalexp.option.common.geyser.geyserSteamHeight.@Tooltip",
+                    "Determines the maximum height of the steam particles produced by the geyser.");
+
+            // Voline Tooltips
+            builder.add("text.autoconfig.infernalexp.option.common.voline.volineTurnIntoGeyser.@Tooltip",
+                    "If enabled, sleeping Volines will transform into Volatile Geysers when hit with a snowball.");
+
+            builder.add("text.autoconfig.infernalexp.option.common.voline.volineSleepWhenFed.@Tooltip",
+                    "If enabled, Volines will fall asleep after eating Magma Cream.");
+
+            builder.add("text.autoconfig.infernalexp.option.common.voline.volineGetBig.@Tooltip",
+                    "If enabled, Volines will grow in size when they eat Magma Cream.");
+
+            builder.add("text.autoconfig.infernalexp.option.common.voline.volineMagmaCreamAmount.@Tooltip",
+                    "Determines the amount of Magma Cream a Voline needs to eat to grow.");
+
+            // Biome Translations
+            builder.add("biome.infernalexp.glowstone_canyon", "Glowstone Canyon");
 
             // This handles all supplied block and item entries automatically
             for (BlockDataHolder<?> blockDataHolder : ModBlocks.getBlockRegistry().values()) {
@@ -258,7 +287,56 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
                 }
             }
         }
+
+        private void generateConfigTranslations(TranslationBuilder builder) {
+            String baseKey = "text.autoconfig." + MOD_ID;
+
+            builder.add(baseKey + ".title", "Infernal Expansion Config");
+
+            for (Field field : IEConfig.class.getDeclaredFields()) {
+                if (isValidConfigField(field)) {
+                    String name = field.getName();
+                    String categoryKey = baseKey + ".category." + name;
+                    builder.add(categoryKey, toHumanReadable(name) + " Settings");
+
+                    processConfigNested(builder, field.getType(), baseKey + ".option." + name);
+                }
+            }
+        }
+
+        private void processConfigNested(TranslationBuilder builder, Class<?> clazz, String parentKey) {
+            for (Field field : clazz.getDeclaredFields()) {
+                if (isValidConfigField(field)) {
+                    String name = field.getName();
+                    String key = parentKey + "." + name;
+                    String humanReadable = toHumanReadable(name);
+
+                    boolean isNestedCategory = field.getType().getName().contains("IEConfig$");
+
+                    if (isNestedCategory) {
+                        builder.add(key, humanReadable + " Content");
+                        processConfigNested(builder, field.getType(), key);
+                    } else {
+                        builder.add(key, humanReadable);
+                    }
+                }
+            }
+        }
+
+        private boolean isValidConfigField(Field field) {
+            return !Modifier.isStatic(field.getModifiers()) && !field.isSynthetic();
+        }
+
+        private String toHumanReadable(String camelCase) {
+            String[] words = StringUtils.splitByCharacterTypeCamelCase(camelCase);
+            return Arrays.stream(words)
+                    .map(StringUtils::capitalize)
+                    .reduce((a, b) -> a + " " + b)
+                    .orElse(camelCase);
+        }
+
     }
+
 
     private static class IEBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         public IEBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {

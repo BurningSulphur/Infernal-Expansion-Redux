@@ -1,4 +1,5 @@
 {
+  "biome.infernalexp.glowstone_canyon": "Glowstone Canyon",
   "block.infernalexp.basalt_bricks": "Basalt Bricks",
   "block.infernalexp.basalt_bricks_slab": "Basalt Bricks Slab",
   "block.infernalexp.basalt_bricks_stairs": "Basalt Bricks Stairs",
@@ -45,6 +46,8 @@
   "block.infernalexp.shroomlight_tear": "Shroomlight Tear",
   "block.infernalexp.volatile_geyser": "Volatile Geyser",
   "block.infernalexp.warped_fungus_cap": "Warped Fungus Cap",
+  "effect.infernalexp.infection": "Infection",
+  "effect.infernalexp.luminous": "Luminous",
   "effect.infernalexp.warped": "Warped",
   "entity.infernalexp.glowsquito": "Glowsquito",
   "entity.infernalexp.voline": "Voline",
@@ -58,23 +61,19 @@
   "item.minecraft.potion.effect.warped": "Potion of Warped",
   "item.minecraft.splash_potion.effect.warped": "Splash Potion of Warped",
   "itemgroup.infernalexp": "Infernal Expansion",
-  "biome.infernalexp.glowstone_canyon": "Glowstone Canyon",
-
-  "text.autoconfig.infernalexp.title": "Infernal Expansion Config",
   "text.autoconfig.infernalexp.category.client": "Client Settings",
   "text.autoconfig.infernalexp.category.common": "Common Settings",
-
   "text.autoconfig.infernalexp.option.common.geyser": "Geyser Content",
-  "text.autoconfig.infernalexp.option.common.geyser.geyserSteamHeight": "Geyser Steam Height (Blocks)",
+  "text.autoconfig.infernalexp.option.common.geyser.geyserSteamHeight": "Geyser Steam Height",
   "text.autoconfig.infernalexp.option.common.geyser.geyserSteamHeight.@Tooltip": "Determines the maximum height of the steam particles produced by the geyser.",
-
   "text.autoconfig.infernalexp.option.common.voline": "Voline Content",
-  "text.autoconfig.infernalexp.option.common.voline.volineTurnIntoGeyser": "Volines Turn Into Geysers",
-  "text.autoconfig.infernalexp.option.common.voline.volineTurnIntoGeyser.@Tooltip": "If enabled, sleeping Volines will transform into Volatile Geysers when hit with a snowball.",
-  "text.autoconfig.infernalexp.option.common.voline.volineSleepWhenFed": "Volines Sleep When Fed",
-  "text.autoconfig.infernalexp.option.common.voline.volineSleepWhenFed.@Tooltip": "If enabled, Volines will fall asleep after eating Magma Cream.",
-  "text.autoconfig.infernalexp.option.common.voline.volineGetBig": "Volines Get Big",
+  "text.autoconfig.infernalexp.option.common.voline.volineGetBig": "Voline Get Big",
   "text.autoconfig.infernalexp.option.common.voline.volineGetBig.@Tooltip": "If enabled, Volines will grow in size when they eat Magma Cream.",
   "text.autoconfig.infernalexp.option.common.voline.volineMagmaCreamAmount": "Voline Magma Cream Amount",
-  "text.autoconfig.infernalexp.option.common.voline.volineMagmaCreamAmount.@Tooltip": "Determines the amount of Magma Cream a Voline needs to eat to grow."
+  "text.autoconfig.infernalexp.option.common.voline.volineMagmaCreamAmount.@Tooltip": "Determines the amount of Magma Cream a Voline needs to eat to grow.",
+  "text.autoconfig.infernalexp.option.common.voline.volineSleepWhenFed": "Voline Sleep When Fed",
+  "text.autoconfig.infernalexp.option.common.voline.volineSleepWhenFed.@Tooltip": "If enabled, Volines will fall asleep after eating Magma Cream.",
+  "text.autoconfig.infernalexp.option.common.voline.volineTurnIntoGeyser": "Voline Turn Into Geyser",
+  "text.autoconfig.infernalexp.option.common.voline.volineTurnIntoGeyser.@Tooltip": "If enabled, sleeping Volines will transform into Volatile Geysers when hit with a snowball.",
+  "text.autoconfig.infernalexp.title": "Infernal Expansion Config"
 }

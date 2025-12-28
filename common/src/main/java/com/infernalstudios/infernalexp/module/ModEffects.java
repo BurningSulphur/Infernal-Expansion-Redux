@@ -27,9 +27,16 @@ public class ModEffects {
     // Called in the mod initializer / constructor in order to make sure that items are registered
     public static void load() {}
 
-
     public static final MobEffectDataHolder<?> WARPED = register("warped", MobEffectDataHolder.of(() ->
-                    new StatusEffect(MobEffectCategory.BENEFICIAL, 0x00ffba)))
+            new StatusEffect(MobEffectCategory.BENEFICIAL, 0x00ffba)))
             .withTranslation("Warped")
             .withPotion(() -> Items.WARPED_FUNGUS);
+
+    public static final MobEffectDataHolder<?> INFECTION = register("infection", MobEffectDataHolder.of(() ->
+            new StatusEffect(MobEffectCategory.HARMFUL, 12918043)))
+            .withTranslation("Infection");
+
+    public static final MobEffectDataHolder<?> LUMINOUS = register("luminous", MobEffectDataHolder.of(() ->
+            new StatusEffect(MobEffectCategory.NEUTRAL, 16777086)))
+            .withTranslation("Luminous");
 }
