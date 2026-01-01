@@ -15,11 +15,11 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class EntityRendererDispatcherMixin {
     @Redirect(method = "renderFlame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/resources/model/Material;sprite()Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;", ordinal = 0))
     private TextureAtlasSprite renderCustomFires0(Material instance, PoseStack posestack, MultiBufferSource source, Entity entity) {
-        return ((FireTypeAccess) entity).getFireType().getSprite0().sprite();
+        return ((FireTypeAccess) entity).infernalexp$getFireType().getSprite0().sprite();
     }
 
     @Redirect(method = "renderFlame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/resources/model/Material;sprite()Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;", ordinal = 1))
     private TextureAtlasSprite renderCustomFires1(Material instance, PoseStack posestack, MultiBufferSource source, Entity entity) {
-        return ((FireTypeAccess) entity).getFireType().getSprite1().sprite();
+        return ((FireTypeAccess) entity).infernalexp$getFireType().getSprite1().sprite();
     }
 }

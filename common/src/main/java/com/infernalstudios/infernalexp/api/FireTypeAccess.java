@@ -1,7 +1,7 @@
 package com.infernalstudios.infernalexp.api;
 
 public interface FireTypeAccess {
-    FireType getFireType();
+    FireType infernalexp$getFireType();
 
-    void setFireType(FireType type);
+    void infernalexp$setFireType(FireType type);
 }

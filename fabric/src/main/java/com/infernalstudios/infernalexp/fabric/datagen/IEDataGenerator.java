@@ -283,6 +283,7 @@ public class IEDataGenerator implements DataGeneratorEntrypoint {
                         builder.add("item.minecraft.potion.effect." + id, "Potion of " + entry.getValue().getTranslation());
                         builder.add("item.minecraft.splash_potion.effect." + id, "Splash Potion of " + entry.getValue().getTranslation());
                         builder.add("item.minecraft.lingering_potion.effect." + id, "Lingering Potion of " + entry.getValue().getTranslation());
+                        builder.add("item.minecraft.tipped_arrow.effect." + id, "Arrow of " + entry.getValue().getTranslation());
                     }
                 }
             }

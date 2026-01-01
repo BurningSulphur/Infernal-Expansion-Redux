@@ -60,6 +60,7 @@
   "item.minecraft.lingering_potion.effect.warped": "Lingering Potion of Warped",
   "item.minecraft.potion.effect.warped": "Potion of Warped",
   "item.minecraft.splash_potion.effect.warped": "Splash Potion of Warped",
+  "item.minecraft.tipped_arrow.effect.warped": "Arrow of Warped",
   "itemgroup.infernalexp": "Infernal Expansion",
   "text.autoconfig.infernalexp.category.client": "Client Settings",
   "text.autoconfig.infernalexp.category.common": "Common Settings",

@@ -24,6 +24,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EntityMixin implements FireTypeAccess {
     @Shadow @Final protected SynchedEntityData entityData;
 
+    @Shadow public abstract boolean isOnFire();
+
+    @Shadow public abstract Level level();
+
     @Unique
     private static final EntityDataAccessor<String> FIRE_TYPE =
             SynchedEntityData.defineId(Entity.class, EntityDataSerializers.STRING);
@@ -35,26 +39,33 @@ public abstract class EntityMixin implements FireTypeAccess {
 
     @Inject(method = "saveWithoutId", at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/CompoundTag;putShort(Ljava/lang/String;S)V", ordinal = 0, shift = At.Shift.AFTER))
     private void writeCustomFires(CompoundTag tag, CallbackInfoReturnable<CompoundTag> ci) {
-        tag.putString("fireType", this.getFireType().getName().toString());
+        tag.putString("fireType", this.infernalexp$getFireType().getName().toString());
     }
 
     @Inject(method = "load", at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/CompoundTag;getShort(Ljava/lang/String;)S", ordinal = 0, shift = At.Shift.AFTER))
     private void readCustomFires(CompoundTag tag, CallbackInfo ci) {
-        this.setFireType(FireType.getOrDefault(new ResourceLocation(tag.getString("fireType")), ModFireTypes.FIRE));
+        this.infernalexp$setFireType(FireType.getOrDefault(new ResourceLocation(tag.getString("fireType")), ModFireTypes.FIRE));
     }
 
     @Inject(method = "setSecondsOnFire", at = @At("HEAD"))
     private void setToDefaultFireType(int seconds, CallbackInfo ci) {
-        this.setFireType(ModFireTypes.FIRE);
+        this.infernalexp$setFireType(ModFireTypes.FIRE);
+    }
+
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void infernalexp$resetFireTypeOnExtinguish(CallbackInfo ci) {
+        if (!this.level().isClientSide && !this.isOnFire() && this.infernalexp$getFireType() != ModFireTypes.FIRE) {
+            this.infernalexp$setFireType(ModFireTypes.FIRE);
+        }
     }
 
     @Override
-    public FireType getFireType() {
+    public FireType infernalexp$getFireType() {
         return FireType.getOrDefault(new ResourceLocation(this.entityData.get(FIRE_TYPE)), ModFireTypes.FIRE);
     }
 
     @Override
-    public void setFireType(FireType type) {
+    public void infernalexp$setFireType(FireType type) {
         this.entityData.set(FIRE_TYPE, type.getName().toString());
     }
 }

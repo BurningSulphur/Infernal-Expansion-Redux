@@ -30,6 +30,6 @@ public class BaseFireBlockMixin {
     @Inject(method = "entityInside", at = @At("TAIL"))
     public void setFireType(BlockState state, Level world, BlockPos pos, Entity entity, CallbackInfo ci) {
         ResourceLocation id = BuiltInRegistries.BLOCK.getKey(state.getBlock());
-        ((FireTypeAccess) entity).setFireType(FireType.getOrDefault(id, ModFireTypes.FIRE));
+        ((FireTypeAccess) entity).infernalexp$setFireType(FireType.getOrDefault(id, ModFireTypes.FIRE));
     }
 }
