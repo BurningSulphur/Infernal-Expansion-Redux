@@ -31,6 +31,7 @@ public class IECommon {
         ModCreativeTabs.load();
         ModBiomes.load();
         ModFeatures.load();
+        ModEffects.load();
         ModCarvers.load();
         ModSurfaceRuleConditions.load();
         ModParticleTypes.load();
