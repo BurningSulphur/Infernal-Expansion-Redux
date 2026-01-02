@@ -45,11 +45,6 @@ public interface IPlatformHelper {
     }
 
     /**
-     * Creates a platform-specific instance of a GeckoLib block entity's item.
-     */
-    InfernalGeoBlockItem createGeoBlockItem(Block block, Item.Properties properties, ResourceLocation model, ResourceLocation texture);
-
-    /**
      * Creates a BlockEntityType using platform-specific builders.
      */
     <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(BlockEntityFactory<T> factory, Block... blocks);

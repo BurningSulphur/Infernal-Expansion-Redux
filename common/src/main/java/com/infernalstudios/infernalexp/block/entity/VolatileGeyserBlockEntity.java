@@ -15,15 +15,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class VolatileGeyserBlockEntity extends BlockEntity implements GeoBlockEntity {
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+public class VolatileGeyserBlockEntity extends BlockEntity {
     private int cooldown = 0;
 
     public VolatileGeyserBlockEntity(BlockPos pos, BlockState state) {
@@ -182,7 +177,7 @@ public class VolatileGeyserBlockEntity extends BlockEntity implements GeoBlockEn
         int particleCount = 40;
         double speed = 0.6;
 
-        for(int i = 0; i < particleCount; i++) {
+        for (int i = 0; i < particleCount; i++) {
             double x = pos.getX() + 0.5 + (facing.getStepX() * 0.5);
             double y = pos.getY() + 0.5 + (facing.getStepY() * 0.5);
             double z = pos.getZ() + 0.5 + (facing.getStepZ() * 0.5);
@@ -219,13 +214,4 @@ public class VolatileGeyserBlockEntity extends BlockEntity implements GeoBlockEn
         return super.triggerEvent(id, type);
     }
 
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        // controllers.add(new AnimationController<>(this, "controller", 0, state -> state.setAndContinue(RawAnimation.begin().thenLoop("animation.volatile_geyser.idle"))));
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.cache;
-    }
 }

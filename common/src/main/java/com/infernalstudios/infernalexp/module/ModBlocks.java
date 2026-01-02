@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -295,13 +296,7 @@ public class ModBlocks {
 
     public static final BlockDataHolder<?> VOLATILE_GEYSER = register("volatile_geyser", BlockDataHolder.of(() ->
             new VolatileGeyserBlock(BlockBehaviour.Properties.copy(Blocks.STONE))))
-            .withCustomItem(block -> Services.PLATFORM.createGeoBlockItem(
-                    block,
-                    new Item.Properties(),
-                    new ResourceLocation(IEConstants.MOD_ID, "geo/volatile_geyser.geo.json"),
-                    new ResourceLocation(IEConstants.MOD_ID, "textures/block/volatile_geyser.png")
-            ))
-            .dropsSelf()
+            .withItem().dropsSelf()
             .withTags(BlockTags.MINEABLE_WITH_PICKAXE)
             .withTranslation("Volatile Geyser");
 }

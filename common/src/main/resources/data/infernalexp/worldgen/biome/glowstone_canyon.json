@@ -4,7 +4,7 @@
       "infernalexp:glowstone_ravine"
     ]
   },
-  "downfall": 0.5,
+  "downfall": 0.0,
   "effects": {
     "additions_sound": {
       "sound": "infernalexp:ambient.glowstone_canyon.additions",
@@ -74,5 +74,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.7
+  "temperature": 2.0
 }

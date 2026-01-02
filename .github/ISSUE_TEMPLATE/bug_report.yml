@@ -42,7 +42,9 @@ body:
             label: Mod Version
             description: The version of IE Redux you were using
             options:
-                - "1.0.0"
+                - "0.1.1"
+                - "0.1.0"
+                - "0.0.1"
         validations:
             required: true
     -   type: dropdown
